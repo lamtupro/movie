@@ -1,0 +1,70 @@
+{
+  "kind": "collectionType",
+  "collectionName": "movies",
+  "info": {
+    "singularName": "movie",
+    "pluralName": "movies",
+    "displayName": "Movie",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "actresses": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::actress.actress",
+      "mappedBy": "movies"
+    },
+    "image": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "link_1": {
+      "type": "string"
+    },
+    "link_2": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "likes": {
+      "type": "integer"
+    },
+    "us": {
+      "type": "boolean"
+    },
+    "han_quoc": {
+      "type": "boolean"
+    },
+    "nhat_ban": {
+      "type": "boolean"
+    },
+    "trung_quoc": {
+      "type": "boolean"
+    },
+    "special": {
+      "type": "boolean"
+    },
+    "views": {
+      "type": "biginteger"
+    },
+    "dislikes": {
+      "type": "integer"
+    }
+  }
+}
