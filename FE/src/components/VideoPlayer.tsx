@@ -17,46 +17,46 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
 
     const adRef = useRef<HTMLVideoElement>(null);
 
-    useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/banners?populate=*&filters[video][$eq]=true`)
-            .then(res => res.json())
-            .then(data => setVideoAds(data?.data ?? []))
-            .catch(err => console.error(err));
-    }, []);
+    /*  useEffect(() => {
+         fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/banners?populate=*&filters[video][$eq]=true`)
+             .then(res => res.json())
+             .then(data => setVideoAds(data?.data ?? []))
+             .catch(err => console.error(err));
+     }, []); */
 
     // Lấy video quảng cáo từ Strapi
     const videoUrl = videoAds.length > 0 ? videoAds[0]?.video_url : ''; // Sửa lại đoạn này
     const adLink = videoAds.length > 0 ? videoAds[0]?.link : ''; // Link quảng cáo
 
-    useEffect(() => {
-        let skipTimer: NodeJS.Timeout;
-        let watchTimer: NodeJS.Timeout;
-
-        if (isStarted && !showMainVideo) {
-            // Bắt đầu đếm thời gian xem
-            watchTimer = setInterval(() => {
-                setWatchTime((prev) => prev + 1);
-            }, 1000);
-
-            // Đếm ngược nút skip
-            if (!canSkip && countdown > 0) {
-                skipTimer = setTimeout(() => {
-                    setCountdown((prev) => prev - 1);
-                }, 1000);
-            }
-
-            // Sau 5s thì có thể skip
-            if (countdown === 0 && !canSkip) {
-                setCanSkip(true);
-            }
-        }
-
-        return () => {
-            clearTimeout(skipTimer);
-            clearInterval(watchTimer);
-        };
-    }, [isStarted, countdown, canSkip, showMainVideo]);
-
+    /*   useEffect(() => {
+          let skipTimer: NodeJS.Timeout;
+          let watchTimer: NodeJS.Timeout;
+  
+          if (isStarted && !showMainVideo) {
+              // Bắt đầu đếm thời gian xem
+              watchTimer = setInterval(() => {
+                  setWatchTime((prev) => prev + 1);
+              }, 1000);
+  
+              // Đếm ngược nút skip
+              if (!canSkip && countdown > 0) {
+                  skipTimer = setTimeout(() => {
+                      setCountdown((prev) => prev - 1);
+                  }, 1000);
+              }
+  
+              // Sau 5s thì có thể skip
+              if (countdown === 0 && !canSkip) {
+                  setCanSkip(true);
+              }
+          }
+  
+          return () => {
+              clearTimeout(skipTimer);
+              clearInterval(watchTimer);
+          };
+      }, [isStarted, countdown, canSkip, showMainVideo]);
+  */
     const handleStart = () => {
         if (!isStarted) {
             setIsStarted(true);
@@ -107,16 +107,16 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
     return (
         <div
             className="w-full aspect-video rounded-lg shadow-lg relative bg-black flex items-center justify-center cursor-pointer"
-            onClick={handleStart}
+        /* onClick={handleStart} */
         >
             {/* Trạng thái chờ bắt đầu */}
-            {!isStarted && !showMainVideo && (
+            {/*  {!isStarted && !showMainVideo && (
                 <div className="text-white text-sm opacity-50">
                     <FaPlay className="text-white w-6 h-6" />
                 </div>
-            )}
+            )} 
 
-            {/* Quảng cáo */}
+           Quảng cáo 
             {isStarted && !showMainVideo && (
                 <div className="absolute inset-0" onClick={handleAdClick}>
                     <video
@@ -145,23 +145,30 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
                         )}
                     </div>
                 </div>
-            )}
+            )}  */}
+
 
             {/* Video chính */}
-            {showMainVideo && (
-    <div className="absolute inset-0 w-full h-full rounded-lg overflow-hidden">
-        <video
+            {/*  {showMainVideo && ( */}
+            <div className="absolute inset-0 w-full h-full rounded-lg overflow-hidden">
+                {/*  <video
             src={url}
             className="w-full h-full object-cover rounded-lg"
             controls
             autoPlay
             playsInline
-        />
-        <div className="absolute top-6 right-6 opacity-30 text-red-500 text-xl font-mono font-bold px-2 py-1 rounded">
-            QUỐC LÂM TỰ
-        </div>
-    </div>
-)}
+        /> */}
+                <iframe
+                    src={url}
+                    className="w-full border-none h-full object-cover"
+                    allow="autoplay; fullscreen"
+                    allowFullScreen
+                ></iframe>
+                <div className="absolute top-6 right-6 opacity-30 text-red-500 text-xl font-mono font-bold px-2 py-1 rounded">
+                    QUỐC LÂM TỰ
+                </div>
+            </div>
+            {/* )} */}
 
 
         </div>
