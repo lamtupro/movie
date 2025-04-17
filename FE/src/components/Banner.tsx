@@ -47,7 +47,7 @@ const Banner = () => {
               }}
             >
               <Image
-                src={banner.image_url || '/default-image.jpg'}
+                src={banner.image_url || ''}
                 alt={banner.name}
                 layout="fill"
                 className="rounded-lg"

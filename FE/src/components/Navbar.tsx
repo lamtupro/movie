@@ -125,7 +125,7 @@ const Navbar = () => {
                     }
                   }}>
                     <Image
-                      src={banner.image_url}
+                      src={banner.image_url || ""}
                       alt={banner.name}
                       layout="fill"
                       className="rounded-lg"
