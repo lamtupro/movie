@@ -150,11 +150,11 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
 
             {/* Video chính */}
             {/*  {showMainVideo && ( */}
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+            <div className=" w-full aspect-video rounded-lg overflow-hidden">
                 <iframe
                     src={url}
-                    className="absolute inset-0 w-full h-full border-none object-cover"
-                    allow="autoplay; fullscreen"
+                    className=" inset-0 w-full h-full border-none object-cover"
+                   
                     allowFullScreen
                 ></iframe>
 
