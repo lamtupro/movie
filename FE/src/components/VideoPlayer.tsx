@@ -150,20 +150,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
 
             {/* Video chính */}
             {/*  {showMainVideo && ( */}
-            <div className="absolute inset-0 w-full h-full rounded-lg overflow-hidden">
-                {/*  <video
-            src={url}
-            className="w-full h-full object-cover rounded-lg"
-            controls
-            autoPlay
-            playsInline
-        /> */}
+            <div className="relative w-full aspect-video rounded-lg overflow-hidden">
                 <iframe
                     src={url}
-                    className="w-full border-none h-full object-cover"
+                    className="absolute inset-0 w-full h-full border-none object-cover"
                     allow="autoplay; fullscreen"
                     allowFullScreen
                 ></iframe>
+
                 <div className="absolute top-6 right-6 opacity-30 text-red-500 text-xl font-mono font-bold px-2 py-1 rounded">
                     QUỐC LÂM TỰ
                 </div>
