@@ -98,10 +98,14 @@ const Slug = () => {
         <div key={movie.documentId} className='text-white mt-16 w-full max-w-4xl mx-auto my-4'>
           <p className='my-8 text-xl '>{movie.name}</p>
 
-          <VideoPlayer
-            key={activeLinks[movie.documentId] || movie.link_1} // ép re-render
-            url={activeLinks[movie.documentId] || movie.link_1}
-          />
+          {movie.link_1 || movie.link_2 ? (
+            <VideoPlayer
+              key={activeLinks[movie.documentId] || movie.link_1 || movie.link_2}
+              url={activeLinks[movie.documentId] || movie.link_1 || movie.link_2}
+            />
+          ) : (
+            <p>Không có video</p>
+          )}
           {/* {movie.link_1 ? (
             <iframe
               width="420"
@@ -114,9 +118,9 @@ const Slug = () => {
             <p>Không có video</p>
           )}
  */}
-          <div className='md:flex flex flex-col gap-4 justify-between'>
+          <div className='flex flex-col md:flex-row gap-4 justify-between'>
             <div className="flex space-x-2 mt-4">
-            <button
+              <button
                 className={`p-2 rounded ${activeLinks[movie.documentId] === movie.link_1 ? 'bg-blue-500' : 'bg-gray-700'} text-white`}
                 onClick={() => handleLinkChange(movie.documentId, movie.link_1)}
               >
@@ -163,9 +167,9 @@ const Slug = () => {
 
           <br />
           {movie.code && (
-             <span className='rounded-lg bg-zinc-700 p-3 mt-1'>{movie.code}</span>
+            <span className='rounded-lg bg-zinc-700 p-3 mt-1'>{movie.code}</span>
           )}
-         
+
           <p className="my-8">{movie.description || "Video không có nội dung"}</p>
         </div>
       ))}

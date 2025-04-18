@@ -157,10 +157,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
                    
                     allowFullScreen
                 ></iframe>
-
-                <div className="absolute top-6 right-6 opacity-30 text-red-500 text-xl font-mono font-bold px-2 py-1 rounded">
-                    QUỐC LÂM TỰ
-                </div>
             </div>
             {/* )} */}
 
