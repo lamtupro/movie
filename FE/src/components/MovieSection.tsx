@@ -85,7 +85,7 @@ const MovieSection = ({ title, movies }: {
               <Link href={`/${movie.slug}`} key={movie.id}>
                 <div className="relative group overflow-hidden rounded-lg text-sm">
                   <img
-                    src={srcImg || imgUrl}
+                    src={imgUrl}
                     alt={movie.title}
                     width={300}
                     height={200}
