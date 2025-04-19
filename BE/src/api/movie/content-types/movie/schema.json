@@ -57,14 +57,24 @@
     "trung_quoc": {
       "type": "boolean"
     },
-    "special": {
-      "type": "boolean"
-    },
     "views": {
-      "type": "biginteger"
+      "type": "biginteger",
+      "default": "1"
     },
     "dislikes": {
       "type": "integer"
+    },
+    "vietsub": {
+      "type": "boolean"
+    },
+    "tap_the": {
+      "type": "boolean"
+    },
+    "vung_trom": {
+      "type": "boolean"
+    },
+    "hiep_dam": {
+      "type": "boolean"
     }
   }
 }

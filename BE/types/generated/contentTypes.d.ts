@@ -460,6 +460,7 @@ export interface ApiMovieMovie extends Struct.CollectionTypeSchema {
     description: Schema.Attribute.Text;
     dislikes: Schema.Attribute.Integer;
     han_quoc: Schema.Attribute.Boolean;
+    hiep_dam: Schema.Attribute.Boolean;
     image: Schema.Attribute.String;
     likes: Schema.Attribute.Integer;
     link_1: Schema.Attribute.String;
@@ -471,14 +472,16 @@ export interface ApiMovieMovie extends Struct.CollectionTypeSchema {
     nhat_ban: Schema.Attribute.Boolean;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.UID<'name'>;
-    special: Schema.Attribute.Boolean;
+    tap_the: Schema.Attribute.Boolean;
     title: Schema.Attribute.String;
     trung_quoc: Schema.Attribute.Boolean;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     us: Schema.Attribute.Boolean;
-    views: Schema.Attribute.BigInteger;
+    vietsub: Schema.Attribute.Boolean;
+    views: Schema.Attribute.BigInteger & Schema.Attribute.DefaultTo<'1'>;
+    vung_trom: Schema.Attribute.Boolean;
   };
 }
 

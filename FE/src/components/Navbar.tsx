@@ -16,13 +16,13 @@ const Navbar = () => {
 
   const genres = [
     { id: 1, name: 'Vietsub', slug: 'viet-sub' },
-   /*  { id: 2, name: 'Không Che', slug: 'khong-che' },
-    { id: 3, name: 'Quay lén', slug: 'quay-len' },
-    { id: 4, name: 'Loạn Luân', slug: 'loan-luan' },
-    { id: 5, name: 'Thủ Dâm', slug: 'thu-dam' },
-    { id: 6, name: 'Tự Quay', slug: 'tu-quay' },
-    { id: 7, name: 'Gái Xinh', slug: 'gai-xinh' },
-    { id: 8, name: 'Gái Gọi', slug: 'gai-goi' } */
+    /*  { id: 2, name: 'Không Che', slug: 'khong-che' },
+     { id: 3, name: 'Quay lén', slug: 'quay-len' },
+     { id: 4, name: 'Loạn Luân', slug: 'loan-luan' },
+     { id: 5, name: 'Thủ Dâm', slug: 'thu-dam' },
+     { id: 6, name: 'Tự Quay', slug: 'tu-quay' },
+     { id: 7, name: 'Gái Xinh', slug: 'gai-xinh' },
+     { id: 8, name: 'Gái Gọi', slug: 'gai-goi' } */
   ];
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -55,12 +55,18 @@ const Navbar = () => {
 
             <ul className="flex relative flex-wrap gap-x-3 text-sm ml-10 gap-y-2 md:text-lg">
               <Link href='/'><li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Trang chủ</li></Link>
-              <Link href='/au-my'><li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Âu Mỹ</li></Link>
+              <Link href='/phim-hay'><li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Sex Hay</li></Link>
               <Link href='/nhat-ban'><li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Nhật Bản</li></Link>
               <Link href='/trung-quoc'><li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Trung Quốc</li></Link>
-              <Link href='/han-quoc'> <li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Hàn Quốc</li></Link>
-              <li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg list-none" onClick={() => setShowGenres(!showGenres)}>Thể Loại</li>
-              {showGenres && (
+              <Link href='/han-quoc'> <li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Hàn Quốc</li></Link>              
+              <Link href='/au-my'><li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Âu Mỹ</li></Link>
+              <Link href='/khong-che'> <li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Không Che</li></Link>
+              <Link href='/viet-sub'> <li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Vietsub</li></Link>
+              <Link href='/tap-the'> <li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Tập thể</li></Link>
+              <Link href='/vung-trom'> <li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Vụng trộm</li></Link>
+              <Link href='/hiep-dam'> <li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg">Hiếp dâm</li></Link>
+              {/*  <li className="hover:text-gray-400 cursor-pointer bg-zinc-800 md:p-2 p-1 rounded-lg list-none" onClick={() => setShowGenres(!showGenres)}>Thể Loại</li>
+             {showGenres && (
                 <div className="absolute top-full mt-2 right-0 w-full md:w-8/12 z-50 md:text-xl bg-zinc-900 border border-gray-700 rounded-lg shadow-lg md:p-4 p-1">
                   <ul className="grid grid-cols-2 md:grid-cols-2 text-center">
                     {genres.map((genre, index) => (
@@ -77,7 +83,7 @@ const Navbar = () => {
                     ))}
                   </ul>
                 </div>
-              )}
+              )} */}
             </ul>
 
           </div>
