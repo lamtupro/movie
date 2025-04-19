@@ -17,6 +17,7 @@ const ListMovie = () => {
     fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&sort=createdAt:desc`)
       .then(respone => respone.json())
       .then(data => setMovies(data.data))
+
   }, [])
 
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -85,37 +86,44 @@ const ListMovie = () => {
         <h2 className='text-2xl text-white my-4'>Phim vừa cập nhật</h2>
         {/* List Phim */}
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-y-10 gap-x-4">
-          {currentMovies.map((movie) => (
-            <Link href={`/${movie.slug}`}>
-              <div key={movie.id} className="relative group overflow-hidden rounded-lg text-sm">
-                <img
-                  src={movie.image}
-                  alt={movie.title}
-                  width={300}
-                  height={200}
-                  className="w-full md:h-48 sm:40 h-32 object-cover rounded-lg transition-transform group-hover:scale-105"
-                />
-                {movie.title && (
-                  <span className="absolute top-2 left-2 bg-stone-900 bg-opacity-40 text-white text-xs px-2 py-1 rounded">
-                    {movie.title || ''}
-                  </span>
-                )}
+          {currentMovies.map((movie) => {
+            const imgUrl = movie.image.data[0].url
+            const imgSrc = process.env.NEXT_PUBLIC_STRAPI_URL + imgUrl 
 
-                <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 md:gap-4 bg-black bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
-                  <div className='flex items-center gap-1'>
-                    {formatNumber(movie.views || 0)}<IoEye />
-                  </div>
-                  <div className='flex items-center gap-1'>
-                    {formatNumber(movie.likes || 0)} <BiLike />
-                  </div>
+            return (
+              <Link href={`/${movie.slug}`}>
+                <div key={movie.id} className="relative group overflow-hidden rounded-lg text-sm">
+                  <img
+                    src={imgSrc}
+                    alt={movie.title}
+                    width={300}
+                    height={200}
+                    className="w-full md:h-48 sm:40 h-32 object-cover rounded-lg transition-transform group-hover:scale-105"
+                  />
+                 
+                  {movie.title && (
+                    <span className="absolute top-2 left-2 bg-stone-900 bg-opacity-40 text-white text-xs px-2 py-1 rounded">
+                      {movie.title || ''}
+                    </span>
+                  )}
 
+                  <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 md:gap-4 bg-black bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
+                    <div className='flex items-center gap-1'>
+                      {formatNumber(movie.views || 0)}<IoEye />
+                    </div>
+                    <div className='flex items-center gap-1'>
+                      {formatNumber(movie.likes || 0)} <BiLike />
+                    </div>
+
+                  </div>
                 </div>
-              </div>
-              <div className="  bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
-                {movie.name}
-              </div>
-            </Link>
-          ))}
+                <div className="  bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
+                  {movie.name}
+                </div>
+              </Link>
+              
+            )
+          })}
         </div>
 
         {/* Pagination */}

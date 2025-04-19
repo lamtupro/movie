@@ -12,7 +12,8 @@
   },
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
       "type": "text"
@@ -23,15 +24,14 @@
       "target": "api::actress.actress",
       "mappedBy": "movies"
     },
-    "image": {
-      "type": "string"
-    },
     "slug": {
       "type": "uid",
-      "targetField": "name"
+      "targetField": "name",
+      "required": true
     },
     "link_1": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "link_2": {
       "type": "string"
@@ -75,6 +75,14 @@
     },
     "hiep_dam": {
       "type": "boolean"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

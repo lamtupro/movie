@@ -46,7 +46,7 @@ const Navbar = () => {
           <div className="flex items-center ">
             <div className="min-w-[45px]">
               <Link href='/'><Image
-                src="/logo.jpg"
+                src="/logo.png"
                 alt="Logo"
                 width={80}
                 height={40} className="bg-black"

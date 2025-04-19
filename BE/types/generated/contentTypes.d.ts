@@ -461,17 +461,17 @@ export interface ApiMovieMovie extends Struct.CollectionTypeSchema {
     dislikes: Schema.Attribute.Integer;
     han_quoc: Schema.Attribute.Boolean;
     hiep_dam: Schema.Attribute.Boolean;
-    image: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     likes: Schema.Attribute.Integer;
-    link_1: Schema.Attribute.String;
+    link_1: Schema.Attribute.String & Schema.Attribute.Required;
     link_2: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::movie.movie'> &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     nhat_ban: Schema.Attribute.Boolean;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'name'>;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
     tap_the: Schema.Attribute.Boolean;
     title: Schema.Attribute.String;
     trung_quoc: Schema.Attribute.Boolean;
