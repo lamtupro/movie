@@ -6,7 +6,6 @@ import { BiLike } from "react-icons/bi"
 import { IoEye } from 'react-icons/io5'
 import Link from 'next/link';
 import formatNumber from '../regret/formatNumber';
-import Image from 'next/image';
 
 const MovieSection = ({ title, movies }: {
   title: string;
@@ -85,8 +84,8 @@ const MovieSection = ({ title, movies }: {
             return (
               <Link href={`/${movie.slug}`} key={movie.id}>
                 <div className="relative group overflow-hidden rounded-lg text-sm">
-                  <Image
-                    src={movie.image?.url}
+                  <img
+                    src={srcImg || imgUrl}
                     alt={movie.title}
                     width={300}
                     height={200}
