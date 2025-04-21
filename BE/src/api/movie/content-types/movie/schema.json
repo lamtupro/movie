@@ -83,6 +83,9 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "khong_che": {
+      "type": "boolean"
     }
   }
 }

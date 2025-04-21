@@ -462,6 +462,7 @@ export interface ApiMovieMovie extends Struct.CollectionTypeSchema {
     han_quoc: Schema.Attribute.Boolean;
     hiep_dam: Schema.Attribute.Boolean;
     image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
+    khong_che: Schema.Attribute.Boolean;
     likes: Schema.Attribute.Integer;
     link_1: Schema.Attribute.String & Schema.Attribute.Required;
     link_2: Schema.Attribute.String;

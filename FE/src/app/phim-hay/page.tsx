@@ -12,7 +12,7 @@ const page = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&sort=views:desc&pagination[limit]=100`)
+        const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?sort=views:desc&pagination[limit]=100`)
 
         if (!res.ok) throw new Error("Fetch failed")
 

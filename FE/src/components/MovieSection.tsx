@@ -86,7 +86,7 @@ const MovieSection = ({ title, movies }: {
                 <div className="relative group overflow-hidden rounded-lg text-sm">
                   <img
                     src={imgUrl}
-                    alt={movie.title}
+                    alt={movie.name}
                     width={300}
                     height={200}
                     className="w-full md:h-48 sm:40 h-32 object-cover rounded-lg transition-transform group-hover:scale-105"
@@ -107,10 +107,10 @@ const MovieSection = ({ title, movies }: {
 
                   </div>
                 </div>
-                <div className="bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
+                <h3 className="bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
                   {movie.name}
 
-                </div>
+                </h3>
               </Link>
             )
           })}
@@ -128,7 +128,7 @@ const MovieSection = ({ title, movies }: {
 
           {renderPageNumbers()}
 
-          < button
+          <button
             onClick={() => handlePageChange(currentPage + 1)}
             className="px-3 py-1 rounded bg-gray-700 text-white"
             disabled={currentPage === totalPages}
