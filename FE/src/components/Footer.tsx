@@ -35,10 +35,9 @@ const Footer = () => {
                     </div>
                     
                 </div>
-               {/*  <p className="mt-8 text-gray-300">... là web xem phim ... dành cho người lớn trên 19 tuổi, giúp bạn giải trí, thỏa mãn sinh lý, dưới 19 tuổi xin vui lòng quay ra.
+                <p className="mt-8 text-gray-300">Quoclamtu.live là web xem phim dành cho người lớn trên 19 tuổi, giúp bạn giải trí, thỏa mãn sinh lý, dưới 19 tuổi xin vui lòng quay ra.
 
-                        Trang web này không đăng tải clip ... Việt Nam, video ... trẻ em. Nội dung phim được dàn dựng từ trước, hoàn toàn không có thật, người xem tuyệt đối không bắt chước hành động trong phim, tránh vi phạm pháp luật.</p>
- */}
+                        Trang web này không đăng tải clip Việt Nam, video trẻ em. Nội dung phim được dàn dựng từ trước, hoàn toàn không có thật, người xem tuyệt đối không bắt chước hành động trong phim, tránh vi phạm pháp luật.</p>
             </div>
         </footer>
     )

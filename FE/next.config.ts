@@ -45,10 +45,7 @@ const nextConfig: NextConfig = {
         source: "/khong-che",
         destination: "/noOpacity",
       },
-      {
-        source: "/viet-sub",
-        destination: "/vietSub",
-      },
+      
     ];
   },
 };

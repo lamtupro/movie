@@ -73,7 +73,7 @@ const MovieSection = ({ title, movies }: {
     );
   };
   return (
-    <div className="bg-[#0F0F10] py-8">
+    <div className="bg-[#0F0F10] py-4">
       <div className="container mx-auto px-2 md:px-4">
         <h2 className='text-2xl text-white my-4'>{title}</h2>
         {/* List Phim */}
@@ -86,13 +86,14 @@ const MovieSection = ({ title, movies }: {
                 <div className="relative group overflow-hidden rounded-lg text-sm">
                   <img
                     src={imgUrl}
-                    alt={movie.title}
+                    alt={movie.name}
                     width={300}
                     height={200}
+                    loading="lazy"
                     className="w-full md:h-48 sm:40 h-32 object-cover rounded-lg transition-transform group-hover:scale-105"
                   />
                   {movie.title && (
-                    <span className="absolute top-2 left-2 bg-stone-900 bg-opacity-40 text-white text-xs px-2 py-1 rounded">
+                    <span className="absolute top-2 left-2 bg-red-600  text-white text-xs px-2 py-1 rounded-xl">
                       {movie.title || ''}
                     </span>
                   )}
