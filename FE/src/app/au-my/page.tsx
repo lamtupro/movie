@@ -1,11 +1,12 @@
 // app/vietsub/page.tsx
 
 import MovieSection from '@/src/components/MovieSection'
+import { Metadata } from 'next'
 
-export const metadata = {
-  title: 'Phim Sex Châu Âu mới nhất',
-  description: 'Tổng hợp danh sách phim sex Châu Âu được cập nhật mới nhất, chất lượng cao.',
-}
+export const metadata:Metadata = {
+  title: 'Phim Sex Âu Mỹ Mới Nhất | Xem Phim Online HD',
+  description: 'Tổng hợp phim sex Âu Mỹ hay nhất, cập nhật mới liên tục. Xem phim sex Âu Mỹ miễn phí, chất lượng cao không quảng cáo.',
+  }
 
 const getMovies = async () => {
   try {

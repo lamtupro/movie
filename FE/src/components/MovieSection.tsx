@@ -107,10 +107,10 @@ const MovieSection = ({ title, movies }: {
 
                   </div>
                 </div>
-                <h3 className="bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
+                <h1 className="bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
                   {movie.name}
 
-                </h3>
+                </h1>
               </Link>
             )
           })}

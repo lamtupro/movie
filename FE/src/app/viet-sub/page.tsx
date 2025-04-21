@@ -1,12 +1,12 @@
 // app/vietsub/page.tsx
 
 import MovieSection from '@/src/components/MovieSection'
+import { Metadata } from 'next'
 
-export const metadata = {
-  title: 'Phim Sex Vietsub mới nhất',
-  description: 'Tổng hợp danh sách phim sex Vietsub được cập nhật mới nhất, chất lượng cao.',
-}
-
+export const metadata:Metadata = {
+  title: 'Phim Sex Vietsub Mới Nhất | Xem Phim Online HD',
+  description: 'Tổng hợp phim sex Vietsub hay nhất, cập nhật mới liên tục. Xem phim sex Vietsub miễn phí, chất lượng cao không quảng cáo.',
+  }
 const getMovies = async () => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?filters[vietsub][$eq]=true&sort=createdAt:desc`, {
