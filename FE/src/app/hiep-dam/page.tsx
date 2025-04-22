@@ -4,15 +4,13 @@ import MovieSection from '@/src/components/MovieSection'
 import { Metadata } from 'next'
 
 export const metadata:Metadata = {
-  title: 'Phim Sex Hàn Quốc Mới Nhất | Xem Phim Online HD',
-  description: 'Tổng hợp phim sex Hàn Quốc hay nhất, cập nhật mới liên tục. Xem phim sex Hàn Quốc miễn phí, chất lượng cao không quảng cáo.',
+  title: 'Phim Sex Hiếp Dâm Mới Nhất | Xem Phim Online HD',
+  description: 'Tổng hợp phim sex Hiếp Dâm hay nhất, cập nhật mới liên tục. Xem phim sex Hiếp Dâm miễn phí, chất lượng cao không quảng cáo.',
   }
 
 const getMovies = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?filters[hiep_dam][$eq]=true&sort=createdAt:desc`, {
-      cache: 'force-cache', // hoặc 'no-store' nếu muốn fetch mỗi lần
-    })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?filters[hiep_dam][$eq]=true&sort=createdAt:desc`)
 
     if (!res.ok) throw new Error('Fetch failed')
 

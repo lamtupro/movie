@@ -92,7 +92,7 @@ const MovieSection = ({ title, movies }: {
                     className="w-full md:h-48 sm:40 h-32 object-cover rounded-lg transition-transform group-hover:scale-105"
                   />
                   {movie.title && (
-                    <span className="absolute top-2 left-2 bg-stone-900 bg-opacity-40 text-white text-xs px-2 py-1 rounded">
+                    <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
                       {movie.title || ''}
                     </span>
                   )}

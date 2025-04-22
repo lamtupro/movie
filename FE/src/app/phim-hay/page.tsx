@@ -10,9 +10,7 @@ export const metadata:Metadata = {
 
 const getMovies = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?sort=views:desc&pagination[limit]=100`, {
-      cache: 'force-cache', // hoặc 'no-store' nếu muốn fetch mỗi lần
-    })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?sort=views:desc&pagination[limit]=100`)
 
     if (!res.ok) throw new Error('Fetch failed')
 
@@ -39,4 +37,3 @@ export default async function NhatPage() {
     <MovieSection title="List Phim Nhật Bản" movies={movies} />
   )
 }
-const categories = ['khong_che', 'vietsub','vung_trom','tap_the','han_quoc', 'nhat_ban', 'us', 'hiep_dam', 'trung_quoc' ]
