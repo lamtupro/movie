@@ -9,7 +9,7 @@ export const metadata:Metadata = {
   }
 const getMovies = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?filters[vietsub][$eq]=true&sort=createdAt:desc`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[vietsub][$eq]=true&sort=createdAt:desc`)
 
     if (!res.ok) throw new Error('Fetch failed')
 
