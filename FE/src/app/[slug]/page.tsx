@@ -125,7 +125,6 @@ const Slug = () => {
   if (!movies.length) return <p className="text-white text-center my-16">Loading...</p>
 
   const movie = movies[0]
-  console.log("â", movie.actresses)
   return (
     <>
       <Head>

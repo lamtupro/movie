@@ -1,68 +1,42 @@
-// app/dien-vien/[slug]/page.tsx
+'use client'
 
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
 import MovieSection from '@/src/components/MovieSection'
-import { Metadata } from 'next'
 
-interface Movie {
-  id: number
-  name: string
-  slug: string
-}
+const Slug = () => {
+  const { slug } = useParams()
+  const [actress, setActress] = useState<any>(null)  // Chỉ lưu 1 diễn viên thay vì mảng
 
-interface Actress {
-  id: number
-  name: string
-  description?: string
-  movies: Movie[]
-}
+  const fetchActress = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/actresses?filters[slug][$eq]=${slug}&populate[movies][populate]=*`
+      )
+      const data = await res.json()
+      const actressData = data.data?.[0] || null  // Lấy đối tượng diễn viên đầu tiên
+      setActress(actressData)  // Lưu diễn viên vào state
 
-export const metadata:Metadata = {
-    title: 'Tuyển tập các idol phim sex Mới Nhất | Xem Phim Online HD',
-    description: 'Tổng hợp idol phim sex xinh đẹp hay nhất, cập nhật mới liên tục. Xem phim sex miễn phí, chất lượng cao không quảng cáo.',
+    } catch (err) {
+      console.error("Error fetching actress:", err)
     }
-
-async function getActress(slug: string): Promise<Actress | null> {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/actresses?filters[slug][$eq]=${slug}&populate=movies`,
-      { cache: 'no-store' }
-    )
-
-    if (!res.ok) throw new Error('Lỗi khi fetch data diễn viên')
-
-    const json = await res.json()
-    const item = json.data?.[0]
-
-    if (!item) return null
-
-    return {
-      id: item.id,
-      name: item.name || 'Không rõ',
-      movies: item.movies || [],
-    }
-  } catch (error) {
-    console.error('❌ Lỗi khi lấy dữ liệu diễn viên:', error)
-    return null
   }
-}
 
-export default async function ActressPage({ params }: { params: { slug: string } }) {
-  const actress = await getActress(params.slug)
+  useEffect(() => {
+    fetchActress()
+  }, [slug])
 
+  // Kiểm tra nếu không có dữ liệu
   if (!actress) {
-    return (
-      <p className="text-white text-center py-10 text-xl">
-        Không tìm thấy diễn viên hoặc dữ liệu không tồn tại 😢
-      </p>
-    )
+    return <p className="text-white text-center py-10 text-xl">Không tìm thấy diễn viên hoặc dữ liệu không tồn tại 😢</p>
   }
 
   return (
     <>
-      <div className="text-white text-center mb-6">
-        {actress.description && <p className="mt-2 text-sm text-gray-400">{actress.description}</p>}
-      </div>
-      <MovieSection title={`Phim của ${actress.name}`} movies={actress.movies} />
+  
+      <MovieSection title={`Phim của ${actress.name}`} movies={actress.movies || []} />
     </>
   )
 }
+
+export default Slug
