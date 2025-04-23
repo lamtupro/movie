@@ -20,7 +20,7 @@ const Slug = () => {
 
   const fetchMovie = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?filters[slug][$eq]=${slug}&`)
+      const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?filters[slug][$eq]=${slug}&populate[actresses][populate]=*`)
       const data = await res.json()
       const movieList = data.data || []
       setMovies(movieList)
@@ -125,11 +125,12 @@ const Slug = () => {
   if (!movies.length) return <p className="text-white text-center my-16">Loading...</p>
 
   const movie = movies[0]
+  console.log("â", movie.actresses)
   return (
     <>
       <Head>
         <title>{movie.name} | Xem phim chất lượng cao</title>
-        <meta name="description" content={movie.description || "Xem phim chất lượng, tốc độ cao, không quảng cáo"} />
+        <meta name="description" content={movie.description || "Xem phim sex chất lượng, tốc độ cao, không quảng cáo"} />
         <meta property="og:title" content={movie.name} />
         <meta property="og:description" content={movie.description || "Phim hấp dẫn, nội dung lôi cuốn"} />
         {movie.image?.url && <meta property="og:image" content={movie.image.url} />}
@@ -205,12 +206,43 @@ const Slug = () => {
           </div>
         </div>
 
-        <br />
+        <br /> 
         {movie.code && (
-          <span className='rounded-lg bg-zinc-700 p-3 mt-1'>{movie.code}</span>
+          <div className="my-4">
+            <h2 className="text-lg font-semibold text-white">Code:</h2>
+            <span className="inline-block bg-zinc-800 text-white px-4 py-2 rounded-full text-sm tracking-wide shadow">
+              {movie.code}
+            </span>
+          </div>
+        )}
+        {movie.actresses && movie.actresses.length > 0 && (
+          <div className="my-4">
+            <h2 className="text-lg font-semibold text-white mb-2">Diễn viên:</h2>
+            <ul className="flex flex-wrap gap-2">
+            
+              {movie.actresses.map((actress: any) => (
+                <Link href={`/dien-vien/${actress.slug}`} key={movie.documentId}>
+                <li key={actress.documentId}>
+                  <span className="inline-block bg-zinc-700 text-white px-3 py-1 rounded-full text-sm hover:bg-red-5 00 transition">
+                    {actress.name}
+                  </span>
+                </li> 
+                 </Link>
+              ))}
+            
+              
+            </ul>
+          </div>
         )}
 
-        <p className="my-8">{movie.description || "Video không có nội dung"}</p>
+       
+        {movie.description && (
+          <div className="my-8">
+            <h2 className="text-lg font-semibold mb-2">Nội dung phim</h2>
+            <p className="text-sm text-zinc-300 leading-relaxed">{movie.description}</p>
+          </div>
+        )}
+
       </main>
       <div className="my-16">
         <h2 className="text-white text-base md:text-xl mb-4">Các Phim Với Nội Dung Tương Tự:</h2>

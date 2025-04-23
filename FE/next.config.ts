@@ -9,10 +9,6 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "res.cloudinary.com",
-      },
-      {
-        protocol: "https",
         hostname: "encrypted-tbn0.gstatic.com",
       },
       {
@@ -21,35 +17,6 @@ const nextConfig: NextConfig = {
       },
 
     ],
-    domains: ["localhost"],
-  },
-  async rewrites() {
-    return [
-      {
-        source: "/phim-hay",
-        destination: "/phimHay",
-      },
-      {
-        source: "/viet-nam",
-        destination: "/vietNam",
-      },
-      {
-        source: "/chau-a",
-        destination: "/asia",
-      },
-      {
-        source: "/chau-au",
-        destination: "/europan",
-      },
-      {
-        source: "/khong-che",
-        destination: "/noOpacity",
-      },
-      {
-        source: "/viet-sub",
-        destination: "/vietSub",
-      },
-    ];
   },
 };
 

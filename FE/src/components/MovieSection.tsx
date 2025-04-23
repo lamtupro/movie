@@ -82,7 +82,7 @@ const MovieSection = ({ title, movies }: {
             const imgUrl = movie.image?.url
             const srcImg = process.env.NEXT_PUBLIC_STRAPI_URL + imgUrl
             return (
-              <Link href={`/${movie.slug}`} key={movie.id}>
+              <Link href={`/${movie.slug}`} key={movie.documentId}>
                 <div className="relative group overflow-hidden rounded-lg text-sm">
                   <img
                     src={imgUrl}
