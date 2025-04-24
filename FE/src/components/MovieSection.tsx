@@ -6,6 +6,7 @@ import { BiLike } from "react-icons/bi"
 import { IoEye } from 'react-icons/io5'
 import Link from 'next/link';
 import formatNumber from '../regret/formatNumber';
+import Image from 'next/image';
 
 const MovieSection = ({ title, movies }: {
   title: string;
@@ -13,7 +14,7 @@ const MovieSection = ({ title, movies }: {
 }) => {
 
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const moviesPerPage: number = 15;
+  const moviesPerPage: number = 20;
   const totalPages: number = Math.ceil(movies.length / moviesPerPage);
 
   // Pagination Logic
@@ -77,18 +78,19 @@ const MovieSection = ({ title, movies }: {
       <div className="container mx-auto px-2 md:px-4">
         <h2 className='text-2xl text-white my-4'>{title}</h2>
         {/* List Phim */}
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-y-10 gap-x-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-y-2 md:gap-y-8 gap-x-4">
           {currentMovies.map((movie) => {
             const imgUrl = movie.image?.url
             const srcImg = process.env.NEXT_PUBLIC_STRAPI_URL + imgUrl
             return (
               <Link href={`/${movie.slug}`} key={movie.documentId}>
                 <div className="relative group overflow-hidden rounded-lg text-sm">
-                  <img
+                  <Image
                     src={imgUrl}
                     alt={movie.name}
                     width={300}
                     height={200}
+                    loading='lazy'
                     className="w-full md:h-48 sm:40 h-32 object-cover rounded-lg transition-transform group-hover:scale-105"
                   />
                   {movie.title && (

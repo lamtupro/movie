@@ -34,7 +34,7 @@ export default function RootLayout({
         <meta name="description" content="Phim sex hay" />
       </Head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased md:px-10 `}
       >
         <GoogleAnalytics/>
         <Navbar/>

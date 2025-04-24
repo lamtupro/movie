@@ -4,13 +4,21 @@ import MovieSection from '@/src/components/MovieSection'
 import { Metadata } from 'next'
 
 export const metadata:Metadata = {
+
+
+
+
+
+  
   title: 'Phim Sex Tập Thể Mới Nhất | Xem Phim Online HD',
   description: 'Tổng hợp phim sex Tập Thể hay nhất, cập nhật mới liên tục. Xem phim sex Tập Thể miễn phí, chất lượng cao không quảng cáo.',
   }
 
 const getMovies = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[tap_the][$eq]=true&sort=createdAt:desc`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[tap_the][$eq]=true&sort=createdAt:desc`, {
+      cache: 'no-store', // Đảm bảo không cache kết quả API
+    })
 
     if (!res.ok) throw new Error('Fetch failed')
 

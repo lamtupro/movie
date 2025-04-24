@@ -1,16 +1,16 @@
-
+// app/vietsub/page.tsx
 
 import MovieSection from '@/src/components/MovieSection'
 import { Metadata } from 'next'
 
 export const metadata:Metadata = {
-  title: 'Phim Sex Top Mới Nhất | Xem Phim Online HD',
-  description: 'Tổng hợp phim sex Top hay nhất, cập nhật mới liên tục. Xem phim sex Top miễn phí, chất lượng cao không quảng cáo.',
+  title: 'Phim Sex Gái Xinh Mới Nhất | Xem Phim Online HD',
+  description: 'Tổng hợp phim sex Gái Xinh hay nhất, cập nhật mới liên tục. Xem phim sex Gái Xinh miễn phí, chất lượng cao không quảng cáo.',
   }
 
 const getMovies = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&sort=views:desc&pagination[limit]=100`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[gai_xinh][$eq]=true&sort=createdAt:desc`, {
       cache: 'no-store', // Đảm bảo không cache kết quả API
     })
 
@@ -19,7 +19,7 @@ const getMovies = async () => {
     const data = await res.json()
     return data.data
   } catch (err) {
-    console.error('❌ Lỗi fetch phim Hay:', err)
+    console.error('❌ Lỗi fetch phim Gái Xinh:', err)
     return null
   }
 }
@@ -36,6 +36,6 @@ export default async function NhatPage() {
   }
 
   return (
-    <MovieSection title="List Phim Hay" movies={movies} />
+    <MovieSection title="List Phim Gái Xinh" movies={movies} />
   )
 }

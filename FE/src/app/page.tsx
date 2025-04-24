@@ -12,7 +12,7 @@ export default function Home() {
     useEffect(() => {
         const fetchMovies = async () => {
           try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&sort=createdAt:desc`)
+            const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&sort=createdAt:desc&pagination[limit]=500`)
     
             if (!res.ok) throw new Error("Fetch failed")
     

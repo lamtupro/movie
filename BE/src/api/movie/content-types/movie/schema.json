@@ -86,6 +86,9 @@
     },
     "khong_che": {
       "type": "boolean"
+    },
+    "gai_xinh": {
+      "type": "boolean"
     }
   }
 }

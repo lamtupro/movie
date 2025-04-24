@@ -12,7 +12,9 @@ const Slug = () => {
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/actresses?filters[slug][$eq]=${slug}&populate[movies][populate]=*`
-      )
+        , {
+          cache: 'no-store', // Đảm bảo không cache kết quả API
+        })
       const data = await res.json()
       const actressData = data.data?.[0] || null  // Lấy đối tượng diễn viên đầu tiên
       setActress(actressData)  // Lưu diễn viên vào state
@@ -33,7 +35,7 @@ const Slug = () => {
 
   return (
     <>
-  
+
       <MovieSection title={`Phim của ${actress.name}`} movies={actress.movies || []} />
     </>
   )

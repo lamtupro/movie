@@ -9,7 +9,9 @@ export const metadata:Metadata = {
   }
 const getMovies = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[vietsub][$eq]=true&sort=createdAt:desc`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[vietsub][$eq]=true&sort=createdAt:desc`, {
+      cache: 'no-store', // Đảm bảo không cache kết quả API
+    })
 
     if (!res.ok) throw new Error('Fetch failed')
 
