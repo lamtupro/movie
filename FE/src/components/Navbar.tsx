@@ -20,7 +20,7 @@ const Navbar = () => {
   const navItems = [
     { href: '/', label: 'Trang Chủ'},
     { href: '/phim-hay', label: 'Phim Hay' },
-    { href: '/gai_xinh', label: 'Gái Xinh' },
+    { href: '/gai-xinh', label: 'Gái Xinh' },
     { href: '/nhat-ban', label: 'Nhật Bản' },
     { href: '/trung-quoc', label: 'Trung Quốc' },
     { href: '/han-quoc', label: 'Hàn Quốc' },

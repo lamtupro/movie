@@ -39,6 +39,6 @@ export default function Home() {
       if (error) return <p className="text-white text-center py-10 text-xl">Không tìm thấy trang hoặc dữ liệu không tồn tại 😢</p>
    
     return (
-      <MovieSection title='Trang Chủ' movies={movies}/>
+      <MovieSection title='Phim Mới Cập Nhật' movies={movies}/>
     )
 }

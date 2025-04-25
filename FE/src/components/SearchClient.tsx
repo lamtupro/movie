@@ -24,7 +24,7 @@ export default function SearchClient() {
 
     const fetchResults = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?filters[name][$containsi]=${query}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[name][$containsi]=${query}`);
         const data = await res.json();
         setResults(data.data || []);
       } catch (err) {
