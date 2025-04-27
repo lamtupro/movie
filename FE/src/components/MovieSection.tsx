@@ -5,27 +5,34 @@ import { IoEye } from 'react-icons/io5';
 import { BiLike } from 'react-icons/bi';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import formatNumber from '../regret/formatNumber';
 
-const MovieSection = ({ title, movies, currentPage, totalPages, basePath }: {
+const MovieSection = ({
+  title,
+  movies,
+  currentPage,
+  totalPages,
+  basePath,
+}: {
   title: string;
   movies: any[];
   currentPage: number;
   totalPages: number;
   basePath: string;
 }) => {
-  const router = useRouter();
-
-  const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
-      router.push(`${basePath}?page=${page}`);
+  
+  const buildPageUrl = (page: number) => {
+    if (basePath.includes('?')) {
+      // Nếu đã có query → thêm bằng &page=
+      return `${basePath}&page=${page}`;
     }
+    // Nếu chưa có query → thêm bằng ?page=
+    return `${basePath}?page=${page}`;
   };
 
   const renderPageNumbers = () => {
     const pageNumbers: (number | string)[] = [];
-    const maxPagesToShow = 4; // 👉 Hiện chỉ 4 nút
+    const maxPagesToShow = 4;
 
     let startPage = Math.max(1, currentPage - 1);
     let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
@@ -41,13 +48,13 @@ const MovieSection = ({ title, movies, currentPage, totalPages, basePath }: {
     return (
       <div className="flex justify-center space-x-2 flex-wrap">
         {pageNumbers.map((page, index) => (
-          <button
+          <Link
             key={index}
-            onClick={() => handlePageChange(Number(page))}
+            href={buildPageUrl(Number(page))}
             className={`px-3 py-1 rounded ${currentPage === page ? 'bg-yellow-500 text-black' : 'bg-gray-700 text-white'}`}
           >
             {page}
-          </button>
+          </Link>
         ))}
       </div>
     );
