@@ -18,7 +18,7 @@ const Navbar = () => {
   const pathname = usePathname()
 
   const navItems = [
-    { href: '/', label: 'Trang Chủ'},
+    { href: '/', label: 'Trang Chủ' },
     { href: '/phim-hay', label: 'Phim Hay' },
     { href: '/gai-xinh', label: 'Gái Xinh' },
     { href: '/nhat-ban', label: 'Nhật Bản' },
@@ -50,10 +50,10 @@ const Navbar = () => {
       <div className=" ml-4 my-4">
         <Link className="inline-block" href='/'><Image
           src="/logo.png"
-          alt="Logo"
+          alt="logo"
           width={220}
-          height={120} className=""
-        /> </Link>
+          height={120}
+        /></Link>
       </div>
       <nav>
         <div className="container mx-auto flex gap-4 items-center justify-between px-4">
@@ -74,7 +74,7 @@ const Navbar = () => {
                   </li>
                 </Link>
               ))}
-             </ul>
+            </ul>
 
           </div>
 

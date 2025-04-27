@@ -135,7 +135,7 @@ const Slug = () => {
         {movie.image?.url && <meta property="og:image" content={movie.image.url} />}
       </Head>
 
-      <main className="text-white mt-16 w-full max-w-4xl mx-auto my-4">
+      <main className="text-white mt-16 w-full max-w-4xl mx-auto my-4 px-2">
         <h1 className="my-8 text-xl font-semibold">{movie.name}</h1>
 
         {movie.link_1 || movie.link_2 ? (
@@ -243,7 +243,7 @@ const Slug = () => {
         )}
 
       </main>
-      <div className="my-16">
+      <div className="my-16 px-2">
         <h2 className="text-white text-base md:text-xl mb-4">Các Phim Với Nội Dung Tương Tự:</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {relatedMovies.map((relatedMovie: any) => (

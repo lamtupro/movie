@@ -1,41 +1,55 @@
-// app/vietsub/page.tsx
-
 import MovieSection from '@/src/components/MovieSection'
 import { Metadata } from 'next'
 
+// Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim Sex Vụng Trộm Mới Nhất | Xem Phim Online HD',
-  description: 'Tổng hợp phim sex Vụng Trộm hay nhất, cập nhật mới liên tục. Xem phim sex Vụng Trộm miễn phí, chất lượng cao không quảng cáo.',
-}
+  title: 'Phim sex vụng trộm mới nhất | Xem phim sex Vụng trộm miễn phí',
+  description: 'Tổng hợp các bộ phim sex vụng trộm chất lượng cao, cập nhật liên tục. Xem phim sex vụng trộm HD miễn phí tại quoclamtu.live .',
+};
 
-const getMovies = async () => {
+const pageSize = 20; // Số phim mỗi trang
+
+const getMovies = async (page: number) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[vung_trom][$eq]=true&sort=createdAt:desc`, {
-      cache: 'no-store', // Đảm bảo không cache kết quả API
-    })
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[vung_trom][$eq]=true&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+      { cache: 'no-store' }
+    );
 
-    if (!res.ok) throw new Error('Fetch failed')
+    if (!res.ok) throw new Error('Fetch failed');
 
-    const data = await res.json()
-    return data.data
+    const data = await res.json();
+    return {
+      movies: data.data || [],
+      total: data.meta?.pagination?.total || 0,
+    };
   } catch (err) {
-    console.error('❌ Lỗi fetch phim Vụng Trộm:', err)
-    return null
+    console.error('❌ Lỗi fetch phim Vụng Trộm:', err);
+    return { movies: [], total: 0 };
   }
-}
+};
 
-export default async function VungTromPage() {
-  const movies = await getMovies()
+export default async function VungTromPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const searchParamsResolved = await searchParams;
+  const currentPage = parseInt(searchParamsResolved.page || '1', 10) || 1;
+  const { movies, total } = await getMovies(currentPage);
+  const totalPages = Math.ceil(total / pageSize);
 
   if (!movies || movies.length === 0) {
     return (
       <p className="text-white text-center py-10 text-xl">
         Không tìm thấy trang hoặc dữ liệu không tồn tại 😢
       </p>
-    )
+    );
   }
 
   return (
-    <MovieSection title="List Phim Vụng Trộm" movies={movies} />
-  )
+    <MovieSection
+      title="List Phim Vụng Trộm"
+      movies={movies}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      basePath="/vung-trom"
+    />
+  );
 }

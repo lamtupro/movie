@@ -1,41 +1,55 @@
-// app/vietsub/page.tsx
-
 import MovieSection from '@/src/components/MovieSection'
 import { Metadata } from 'next'
 
-export const metadata:Metadata = {
-  title: 'Phim Sex Không Che Mới Nhất | Xem Phim Online HD',
-  description: 'Tổng hợp phim sex Không Che hay nhất, cập nhật mới liên tục. Xem phim sex Không Che miễn phí, chất lượng cao không quảng cáo.',
-  }
+// Cấu hình SEO cho trang Vietsub
+export const metadata: Metadata = {
+  title: 'Phim sex không che mới nhất | Xem phim sex không che miễn phí',
+  description: 'Tổng hợp các bộ phim sex không che chất lượng cao, cập nhật liên tục. Xem phim sex không che HD miễn phí tại quoclamtu.live .',
+};
 
-const getMovies = async () => {
+const pageSize = 20; // Số phim mỗi trang
+
+const getMovies = async (page: number) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[khong_che][$eq]=true&sort=createdAt:desc`, {
-      cache: 'no-store', // Đảm bảo không cache kết quả API
-    })
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[khong_che][$eq]=true&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+      { cache: 'no-store' }
+    );
 
-    if (!res.ok) throw new Error('Fetch failed')
+    if (!res.ok) throw new Error('Fetch failed');
 
-    const data = await res.json()
-    return data.data
+    const data = await res.json();
+    return {
+      movies: data.data || [],
+      total: data.meta?.pagination?.total || 0,
+    };
   } catch (err) {
-    console.error('❌ Lỗi fetch phim Không Che', err)
-    return null
+    console.error('❌ Lỗi fetch phim không che:', err);
+    return { movies: [], total: 0 };
   }
-}
+};
 
-export default async function KhongcPage() {
-  const movies = await getMovies()
+export default async function KhongChePage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const searchParamsResolved = await searchParams;
+  const currentPage = parseInt(searchParamsResolved.page || '1', 10) || 1;
+  const { movies, total } = await getMovies(currentPage);
+  const totalPages = Math.ceil(total / pageSize);
 
   if (!movies || movies.length === 0) {
     return (
       <p className="text-white text-center py-10 text-xl">
         Không tìm thấy trang hoặc dữ liệu không tồn tại 😢
       </p>
-    )
+    );
   }
 
   return (
-    <MovieSection title="List Phim Không Che" movies={movies} />
-  )
+    <MovieSection
+      title="List Phim Không Che"
+      movies={movies}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      basePath="/khong-che"
+    />
+  );
 }

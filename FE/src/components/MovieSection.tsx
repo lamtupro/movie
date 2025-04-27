@@ -1,146 +1,110 @@
-"use client"
+'use client';
 
-import React, { useState } from 'react'
-import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
-import { BiLike } from "react-icons/bi"
-import { IoEye } from 'react-icons/io5'
+import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
+import { IoEye } from 'react-icons/io5';
+import { BiLike } from 'react-icons/bi';
 import Link from 'next/link';
-import formatNumber from '../regret/formatNumber';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import formatNumber from '../regret/formatNumber';
 
-const MovieSection = ({ title, movies }: {
+const MovieSection = ({ title, movies, currentPage, totalPages, basePath }: {
   title: string;
   movies: any[];
+  currentPage: number;
+  totalPages: number;
+  basePath: string;
 }) => {
+  const router = useRouter();
 
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const moviesPerPage: number = 20;
-  const totalPages: number = Math.ceil(movies.length / moviesPerPage);
-
-  // Pagination Logic
-  const indexOfLastMovie: number = currentPage * moviesPerPage;
-  const indexOfFirstMovie: number = indexOfLastMovie - moviesPerPage;
-  const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
-
-  const handlePageChange = (pageNumber: number) => {
-    if (pageNumber > 0 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
+  const handlePageChange = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      router.push(`${basePath}?page=${page}`);
     }
   };
 
   const renderPageNumbers = () => {
     const pageNumbers: (number | string)[] = [];
-    const maxPagesToShow = 5;
+    const maxPagesToShow = 4; // 👉 Hiện chỉ 4 nút
 
-    if (totalPages <= maxPagesToShow) {
-      for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(i);
-      }
-    } else {
-      let startPage = Math.max(1, currentPage - 2);
-      let endPage = Math.min(totalPages, currentPage + 2);
+    let startPage = Math.max(1, currentPage - 1);
+    let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
 
-      if (startPage > 1) {
-        pageNumbers.push(1);
-        if (startPage > 2) {
-          pageNumbers.push('...');
-        }
-      }
-
-      for (let i = startPage; i <= endPage; i++) {
-        pageNumbers.push(i);
-      }
-
-      if (endPage < totalPages) {
-        if (endPage < totalPages - 1) {
-          pageNumbers.push('...');
-        }
-        pageNumbers.push(totalPages);
-      }
+    if (endPage - startPage < maxPagesToShow - 1) {
+      startPage = Math.max(1, endPage - maxPagesToShow + 1);
     }
 
-    return pageNumbers.map((page, index) =>
-      typeof page === 'number' ? (
-        <button
-          key={index}
-          onClick={() => handlePageChange(page)}
-          className={`px-3 py-1 rounded ${currentPage === page ? 'bg-yellow-500 text-black' : 'bg-gray-700 text-white'}`}
-        >
-          {page}
-        </button>
-      ) : (
-        <span key={index} className="px-3 py-1 text-gray-500">...</span>
-      )
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    return (
+      <div className="flex justify-center space-x-2 flex-wrap">
+        {pageNumbers.map((page, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(Number(page))}
+            className={`px-3 py-1 rounded ${currentPage === page ? 'bg-yellow-500 text-black' : 'bg-gray-700 text-white'}`}
+          >
+            {page}
+          </button>
+        ))}
+      </div>
     );
   };
+
   return (
     <div className="bg-[#0F0F10] py-8">
       <div className="container mx-auto px-2 md:px-4">
-        <h2 className='text-2xl text-white my-4'>{title}</h2>
-        {/* List Phim */}
-        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-y-2 md:gap-y-8 gap-x-4">
-          {currentMovies.map((movie) => {
-            const imgUrl = movie.image?.url
-            const srcImg = process.env.NEXT_PUBLIC_STRAPI_URL + imgUrl
+        <h2 className="text-2xl text-white my-4">{title}</h2>
+
+        {/* List phim */}
+        <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-y-4 md:gap-y-8 gap-x-4">
+          {movies.map((movie) => {
+            const imgUrl = movie.image?.url;
+            const srcImg = imgUrl.startsWith('http') ? imgUrl : process.env.NEXT_PUBLIC_STRAPI_URL + imgUrl;
             return (
-              <Link href={`/${movie.slug}`} key={movie.documentId}>
+              <Link href={`/${movie.slug}`} key={movie.id} title={movie.name}>
                 <div className="relative group overflow-hidden rounded-lg text-sm">
                   <Image
-                    src={imgUrl}
+                    src={srcImg}
                     alt={movie.name}
                     width={300}
                     height={200}
-                    loading='lazy'
-                    className="w-full md:h-48 sm:40 h-32 object-cover rounded-lg transition-transform group-hover:scale-105"
+                    loading="lazy"
+                    className="w-full h-40 md:h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
                   />
                   {movie.title && (
                     <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
-                      {movie.title || ''}
+                      {movie.title}
                     </span>
                   )}
-
-                  <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 md:gap-4 bg-black bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
-                    <div className='flex items-center gap-1'>
-                      {formatNumber(movie.views || 0)}<IoEye />
+                  <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 bg-black bg-opacity-50 text-white text-sm p-2">
+                    <div className="flex items-center gap-1">
+                      {formatNumber(movie.views || 0)} <IoEye />
                     </div>
-                    <div className='flex items-center gap-1'>
+                    <div className="flex items-center gap-1">
                       {formatNumber(movie.likes || 0)} <BiLike />
                     </div>
-
                   </div>
                 </div>
-                <h1 className="bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
+                <h1 className="text-white text-sm p-2 truncate">
                   {movie.name}
-
                 </h1>
               </Link>
-            )
+            );
           })}
         </div>
 
         {/* Pagination */}
-        < div className="mt-6 flex justify-center space-x-2" >
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            className="px-3 py-1 rounded bg-gray-700 text-white"
-            disabled={currentPage === 1}
-          >
-            <HiChevronLeft />
-          </button>
-
-          {renderPageNumbers()}
-
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            className="px-3 py-1 rounded bg-gray-700 text-white"
-            disabled={currentPage === totalPages}
-          >
-            <HiChevronRight />
-          </button>
-        </div>
+        {totalPages > 1 && (
+          <div className="mt-6">
+            {renderPageNumbers()}
+          </div>
+        )}
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export default MovieSection
+export default MovieSection;

@@ -1,44 +1,49 @@
-"use client"
+import MovieSection from '@/src/components/MovieSection'
+import { Metadata } from 'next'
 
-import { useEffect, useState } from "react";
-import MovieSection from "../components/MovieSection";
+const pageSize = 20;
 
+const getMovies = async (page: number) => {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+      { cache: 'no-store' }
+    );
 
-export default function Home() {
-    const [movies, setMovies] = useState([])
-    const [error, setError] = useState(false)
-    const [loading, setLoading] = useState(true)
-  
-    useEffect(() => {
-        const fetchMovies = async () => {
-          try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&sort=createdAt:desc&pagination[limit]=500`)
-    
-            if (!res.ok) throw new Error("Fetch failed")
-    
-            const data = await res.json()
-    
-            if (!data || !data.data || data.data.length === 0) {
-              setError(true)
-            } else {
-              setMovies(data.data)
-            }
-          } catch (err) {
-            console.error("❌ Lỗi fetch phim Âu Mỹ:", err)
-            setError(true)
-          } finally {
-            setLoading(false)
-          }
-        }
-    
-        fetchMovies()
-      }, [])
-    
-      if (loading) return <p className="text-white text-center py-10">Đang tải dữ liệu...</p>
-    
-      if (error) return <p className="text-white text-center py-10 text-xl">Không tìm thấy trang hoặc dữ liệu không tồn tại 😢</p>
-   
+    if (!res.ok) throw new Error('Fetch failed');
+
+    const data = await res.json();
+    return {
+      movies: data.data || [],
+      total: data.meta?.pagination?.total || 0,
+    };
+  } catch (err) {
+    console.error('❌ Lỗi fetch phim Home:', err);
+    return { movies: [], total: 0 };
+  }
+};
+
+export default async function Home({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const searchParamsResolved = await searchParams;
+  const currentPage = parseInt(searchParamsResolved.page || '1', 10) || 1;
+  const { movies, total } = await getMovies(currentPage);
+  const totalPages = Math.ceil(total / pageSize);
+
+  if (!movies || movies.length === 0) {
     return (
-      <MovieSection title='Phim Mới Cập Nhật' movies={movies}/>
-    )
+      <p className="text-white text-center py-10 text-xl">
+        Không tìm thấy phim nào 😢
+      </p>
+    );
+  }
+
+  return (
+    <MovieSection
+      title="Danh sách phim mới nhất"
+      movies={movies}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      basePath="/"
+    />
+  );
 }
