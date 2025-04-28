@@ -20,41 +20,59 @@ const MovieSection = ({
   totalPages: number;
   basePath: string;
 }) => {
-  
+
   const buildPageUrl = (page: number) => {
     if (basePath.includes('?')) {
-      // Nếu đã có query → thêm bằng &page=
       return `${basePath}&page=${page}`;
     }
-    // Nếu chưa có query → thêm bằng ?page=
     return `${basePath}?page=${page}`;
   };
 
+  const getPagination = () => {
+    const delta = 1;
+    const pages: (number | string)[] = [];
+
+    const left = currentPage - delta;
+    const right = currentPage + delta;
+
+    const range = [];
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || (i >= left && i <= right)) {
+        range.push(i);
+      }
+    }
+
+    let lastPage = 0;
+    for (const page of range) {
+      if (lastPage !== 0 && (page as number) - lastPage > 1) {
+        pages.push('...');
+      }
+      pages.push(page);
+      lastPage = page as number;
+    }
+
+    return pages;
+  };
+
   const renderPageNumbers = () => {
-    const pageNumbers: (number | string)[] = [];
-    const maxPagesToShow = 4;
-
-    let startPage = Math.max(1, currentPage - 1);
-    let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
-
-    if (endPage - startPage < maxPagesToShow - 1) {
-      startPage = Math.max(1, endPage - maxPagesToShow + 1);
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      pageNumbers.push(i);
-    }
+    const pages = getPagination();
 
     return (
       <div className="flex justify-center space-x-2 flex-wrap">
-        {pageNumbers.map((page, index) => (
-          <Link
-            key={index}
-            href={buildPageUrl(Number(page))}
-            className={`px-3 py-1 rounded ${currentPage === page ? 'bg-yellow-500 text-black' : 'bg-gray-700 text-white'}`}
-          >
-            {page}
-          </Link>
+        {pages.map((page, index) => (
+          typeof page === 'number' ? (
+            <Link
+              key={index}
+              href={buildPageUrl(page)}
+              className={`px-3 py-1 rounded ${currentPage === page ? 'bg-yellow-500 text-black' : 'bg-gray-700 text-white'}`}
+            >
+              {page}
+            </Link>
+          ) : (
+            <span key={index} className="px-3 py-1 text-white">
+              {page}
+            </span>
+          )
         ))}
       </div>
     );
