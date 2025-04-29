@@ -38,7 +38,7 @@ const Navbar = () => {
     }
   };
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/banners?filters[banner_top][$eq]=true&populate=*`, {
+    fetch(`${process.env.STRAPI_API_URL}/api/banners?filters[banner_top][$eq]=true&populate=*`, {
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
       },

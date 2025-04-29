@@ -20,62 +20,44 @@ const Slug = () => {
 
   const fetchMovie = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?filters[slug][$eq]=${slug}&populate[actresses][populate]=*`
-       , {
-          headers: {
-            Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`, 
-          },
-        }
-      )
+      const res = await fetch(`/api/movie/${slug}`)
       const data = await res.json()
       const movieList = data.data || []
       setMovies(movieList)
-
-
+  
       if (movieList.length > 0) {
         const movie = movieList[0]
-        const movieId = movie.documentId
-        const currentViews = Number(movie.views) || 0;
-
-        await axios.put(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies/${movieId}`, {
-          data: { views: currentViews + 1 },
+        const movieId = movie.documentId  // ✅ Sử dụng ID từ Strapi
+        const currentViews = Number(movie.views || 0)
+  
+        await axios.put('/api/movie/reactions', {
+          movieId,
+          views: currentViews + 1,
         })
         fetchRelatedMovies(movie)
       }
+      
     } catch (err) {
       console.error("Error fetching movie or updating views:", err)
     }
   }
+  
   const fetchRelatedMovies = async (movie: any) => {
     try {
-      // Get category from the movie object, if it exists
-      const categories = [ 'vietsub', 'han_quoc', 'nhat_ban', 'us', 'trung_quoc']
-      let selectedCategory = ''
-
-      for (const category of categories) {
-        if (movie[category]) {
-          selectedCategory = category
-          break
-        }
-      }
-
-      if (!selectedCategory) return // Return if no category is found
-
-      // Fetch movies with the same category
-      const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[${selectedCategory}]$eq=true`,{
-        
-        
+      const res = await fetch('/api/movie/related', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ movie }),
       })
+  
       const data = await res.json()
-      const categoryMovies = data.data || []
-
-      // Shuffle the movies and pick 6 random movies
-      const shuffledMovies = categoryMovies.sort(() => 0.5 - Math.random())
-      const randomSixMovies = shuffledMovies.slice(0, 6)
-
-      setRelatedMovies(randomSixMovies)
+      const related = data.data || []
+  
+      setRelatedMovies(related)
     } catch (err) {
-      console.error("Error fetching related movies:", err)
+      console.error('Error fetching related movies:', err)
     }
   }
   useEffect(() => {
@@ -120,16 +102,16 @@ const Slug = () => {
     setReactionStatus(prev => ({ ...prev, [movieDocId]: newReaction }))
 
     try {
-      await axios.put(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies/${movieDocId}`, {
-        data: {
-          likes: newLikes,
-          dislikes: newDislikes,
-        },
+      await axios.put('/api/movie/reactions', {
+        movieId: movieDocId,
+        likes: newLikes,
+        dislikes: newDislikes,
       })
     } catch (err) {
       console.error("Lỗi cập nhật like/dislike:", err)
     }
   }
+
 
   if (!movies.length) return <p className="text-white text-center my-16">Loading...</p>
 

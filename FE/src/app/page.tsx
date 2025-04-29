@@ -6,15 +6,14 @@ const pageSize = 20;
 const getMovies = async (page: number) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+      `${process.env.STRAPI_API_URL}/api/movies?populate=*&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
       {
         headers: {
-          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,  // Thêm dòng này
         },
-        cache: 'no-store',  // Không lưu cache, luôn lấy dữ liệu mới
+        cache: 'no-store'
       }
     );
-    
 
     if (!res.ok) throw new Error('Fetch failed');
 

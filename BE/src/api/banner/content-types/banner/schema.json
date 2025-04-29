@@ -20,9 +20,6 @@
     "link": {
       "type": "string"
     },
-    "image_url": {
-      "type": "string"
-    },
     "banner_bot": {
       "type": "boolean"
     },
@@ -32,11 +29,23 @@
     "banner_left": {
       "type": "boolean"
     },
-    "video_url": {
-      "type": "string"
-    },
     "video": {
       "type": "boolean"
+    },
+    "video_url": {
+      "allowedTypes": [
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "image_url": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

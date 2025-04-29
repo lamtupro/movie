@@ -38,7 +38,7 @@ export default function RootLayout({
         <GoogleAnalytics/>
         <Navbar/>
         {children}
-        <Banner/>
+       {/*  <Banner/> */}
         <Footer/>
       </body>
     </html>
