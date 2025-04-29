@@ -118,7 +118,7 @@ const Navbar = () => {
       {/* -------------------------------BANNER----------------------------------- */}
       <div className="container relative mx-auto flex flex-col gap-4 px-4 my-4">
         {banners.map((banner: any, index) => {
-          const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_URL}${banner.image?.url}`;
+          const imageUrl = `${process.env.STRAPI_API_URL}${banner.image?.url}`;
 
           return (
             <div key={index} className="relative w-full md:h-32 h-16 flex flex-col gap-2 rounded-lg">

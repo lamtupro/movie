@@ -12,7 +12,7 @@ const pageSize = 20; // Số phim mỗi trang
 const getMovies = async (page: number) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[nhat_ban][$eq]=true&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+      `${process.env.STRAPI_API_URL}/api/movies?populate=*&filters[nhat_ban][$eq]=true&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
       { headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
       },

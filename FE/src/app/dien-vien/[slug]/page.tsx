@@ -6,7 +6,7 @@ const pageSize = 20; // 20 phim mỗi trang
 const getActress = async (slug: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/actresses?filters[slug][$eq]=${slug}`,
+      `${process.env.STRAPI_API_URL}/api/actresses?filters[slug][$eq]=${slug}`,
       { cache: 'no-store' }
     );
 
@@ -24,7 +24,7 @@ const getActress = async (slug: string) => {
 const getMoviesByActress = async (actressId: number, page: number) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[actresses][id][$eq]=${actressId}&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+      `${process.env.STRAPI_API_URL}/api/movies?populate=*&filters[actresses][id][$eq]=${actressId}&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
       { headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
       },

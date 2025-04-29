@@ -40,7 +40,7 @@ export default function SearchClient() {
     const fetchResults = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[name][$containsi]=${encodeURIComponent(queryParam)}&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
+          `${process.env.STRAPI_API_URL}/api/movies?populate=*&filters[name][$containsi]=${encodeURIComponent(queryParam)}&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
           {
             headers: {
               Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,

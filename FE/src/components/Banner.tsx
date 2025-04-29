@@ -13,7 +13,7 @@ const Banner = () => {
 
   const [banners, setBanners] = useState([])
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/banners?populate=*&filters[banner_bot][$eq]=true`, {
+    fetch(`${process.env.STRAPI_API_URL}/api/banners?populate=*&filters[banner_bot][$eq]=true`, {
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
       },
@@ -40,7 +40,7 @@ const Banner = () => {
     <div className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2  w-10/12 ">
 
       {banners.map((banner: any, index) => {/* 
-        const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_URL}${banner.image?.url}`; */
+        const imageUrl = `${process.env.STRAPI_API_URL}${banner.image?.url}`; */
 
         return (
           <div
