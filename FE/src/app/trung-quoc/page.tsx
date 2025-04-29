@@ -13,7 +13,12 @@ const getMovies = async (page: number) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[trung_quoc][$eq]=true&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
-      { cache: 'no-store' }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,  // Thêm dòng này
+        },
+        cache: 'no-store'
+      }
     );
 
     if (!res.ok) throw new Error('Fetch failed');

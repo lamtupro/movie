@@ -20,7 +20,13 @@ const Slug = () => {
 
   const fetchMovie = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?filters[slug][$eq]=${slug}&populate[actresses][populate]=*`)
+      const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?filters[slug][$eq]=${slug}&populate[actresses][populate]=*`
+       , {
+          headers: {
+            Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`, 
+          },
+        }
+      )
       const data = await res.json()
       const movieList = data.data || []
       setMovies(movieList)
@@ -43,7 +49,7 @@ const Slug = () => {
   const fetchRelatedMovies = async (movie: any) => {
     try {
       // Get category from the movie object, if it exists
-      const categories = ['khong_che', 'vietsub', 'vung_trom', 'tap_the', 'han_quoc', 'nhat_ban', 'us', 'hiep_dam', 'trung_quoc']
+      const categories = [ 'vietsub', 'han_quoc', 'nhat_ban', 'us', 'trung_quoc']
       let selectedCategory = ''
 
       for (const category of categories) {
@@ -56,7 +62,10 @@ const Slug = () => {
       if (!selectedCategory) return // Return if no category is found
 
       // Fetch movies with the same category
-      const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[${selectedCategory}]$eq=true`)
+      const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[${selectedCategory}]$eq=true`,{
+        
+        
+      })
       const data = await res.json()
       const categoryMovies = data.data || []
 
@@ -146,18 +155,6 @@ const Slug = () => {
         ) : (
           <p>Không có video</p>
         )}
-        {/* {movie.link_1 ? (
-            <iframe
-              width="420"
-              height="315"
-              src={activeLinks[movie.documentId] || movie.link_1}
-              allowFullScreen
-              className="w-full aspect-video rounded-lg shadow-lg"
-            />
-          ) : (
-            <p>Không có video</p>
-          )}
- */}
         <div className='flex flex-col md:flex-row gap-4 justify-between'>
           <div className="flex space-x-2 mt-4">
             <button

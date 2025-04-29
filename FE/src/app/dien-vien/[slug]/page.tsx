@@ -25,7 +25,10 @@ const getMoviesByActress = async (actressId: number, page: number) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/movies?populate=*&filters[actresses][id][$eq]=${actressId}&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
-      { cache: 'no-store' }
+      { headers: {
+        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+      },
+       cache: 'no-store' }
     );
 
     if (!res.ok) throw new Error('Lỗi khi lấy danh sách phim');
@@ -79,7 +82,7 @@ export default async function ActressPage({
 
   return (
     <MovieSection
-      title={`Phim của ${actress.attributes?.name || 'Diễn viên'}`}
+      title={`Phim của ${actress.name || 'Diễn viên'}`}
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}
