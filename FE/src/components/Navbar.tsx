@@ -38,11 +38,7 @@ const Navbar = () => {
     }
   };
   useEffect(() => {
-    fetch(`${process.env.STRAPI_API_URL}/api/banners?filters[banner_top][$eq]=true&populate=*`, {
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-      },
-    })
+    fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/banners?filters[banner_top][$eq]=true&populate=*`,)
       .then(res => res.json())
       .then(data => {
         // Nếu trả về đúng định dạng và có mảng data
@@ -136,7 +132,7 @@ const Navbar = () => {
                     }
                   }}>
                     <Image
-                      src={banner.image_url || ""}
+                      src={banner.image_url.url || ""}
                       alt={banner.name}
                       layout="fill"
                       className="rounded-lg"

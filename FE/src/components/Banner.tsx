@@ -13,11 +13,7 @@ const Banner = () => {
 
   const [banners, setBanners] = useState([])
   useEffect(() => {
-    fetch(`${process.env.STRAPI_API_URL}/api/banners?populate=*&filters[banner_bot][$eq]=true`, {
-      headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-      },
-    })
+    fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/banners?populate=*&filters[banner_bot][$eq]=true`,)
       .then(res => res.json())
       .then(data => {
         // Nếu trả về đúng định dạng và có mảng data
@@ -33,7 +29,7 @@ const Banner = () => {
         setBanners([]); // fallback nếu lỗi mạng, v.v.
       });
   }, []);
-  
+
 
   if (!isVisible) return null;
   return (
@@ -63,7 +59,7 @@ const Banner = () => {
               }}
             >
               <Image
-                src={banner.image_url || ''}
+                src={banner.image_url.url || ''}
                 alt={banner.name}
                 layout="fill"
                 className="rounded-lg"
