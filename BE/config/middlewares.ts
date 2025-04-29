@@ -8,7 +8,8 @@ export default [
       enabled: true,
       origin: [
         'https://quoclamtu.live', 
-        'https://www.quoclamtu.live'
+        'https://www.quoclamtu.live',
+        'http://localhost:3000'
       ], // 🔥 Chỉ cho phép domain này
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
       headers: ['Content-Type', 'Authorization'],
