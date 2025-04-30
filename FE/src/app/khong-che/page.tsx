@@ -48,7 +48,7 @@ export default async function KhongChePage({ searchParams }: { searchParams: Pro
 
   return (
     <MovieSection
-      title="List Phim Không Che"
+      title="List Phim Sex Không Che"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

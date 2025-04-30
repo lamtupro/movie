@@ -50,7 +50,7 @@ export default async function TapThePage({ searchParams }: { searchParams: Promi
 
   return (
     <MovieSection
-      title="List Phim Tập Thể"
+      title="List Phim Sex Tập Thể"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

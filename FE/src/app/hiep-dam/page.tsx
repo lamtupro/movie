@@ -49,7 +49,7 @@ export default async function HiepDamPage({ searchParams }: { searchParams: Prom
 
   return (
     <MovieSection
-      title="List Phim Hiếp Dâm"
+      title="List Phim Sex Hiếp Dâm"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

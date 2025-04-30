@@ -222,9 +222,9 @@ const Slug = () => {
         )}
 
       </main>
-      <div className="my-16 px-2">
+      <div className="my-16 max-w-4xl w-full md:mx-auto px-2">
         <h2 className="text-white text-base md:text-xl mb-4">Các Phim Với Nội Dung Tương Tự:</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {relatedMovies.map((relatedMovie: any) => (
 
             <Link href={`/${relatedMovie.slug}`} key={relatedMovie.documentId}>

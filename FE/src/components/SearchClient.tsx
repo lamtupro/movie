@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -14,7 +14,7 @@ type Movie = {
   likes?: number;
 };
 
-const pageSize = 20; // Số phim mỗi trang
+const pageSize = 20;
 
 export default function SearchClient() {
   const searchParams = useSearchParams();
@@ -22,6 +22,7 @@ export default function SearchClient() {
   const [totalResults, setTotalResults] = useState(0);
   const [query, setQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const queryParam = searchParams.get('query') || '';
@@ -38,32 +39,35 @@ export default function SearchClient() {
     }
 
     const fetchResults = async () => {
+      setLoading(true);
       try {
         const res = await fetch(
-          `${process.env.STRAPI_API_URL}/api/movies?populate=*&filters[name][$containsi]=${encodeURIComponent(queryParam)}&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-            },
-            cache: 'no-store'
-          }
+          `/api/movie/search?query=${encodeURIComponent(queryParam)}&page=${page}`,
+          { cache: 'no-store' }
         );
+
         const data = await res.json();
         setResults(data.data || []);
-        setTotalResults(data.meta?.pagination?.total || 0);
+        setTotalResults(data.total || 0);
       } catch (err) {
         console.error('❌ Lỗi tìm kiếm:', err);
+        setResults([]);
+        setTotalResults(0);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchResults();
-  }, [searchParams]); // 🔥 Dependency chuẩn
+  }, [searchParams]);
 
   const totalPages = Math.ceil(totalResults / pageSize);
 
   return (
     <div className="text-white">
-      {results.length > 0 ? (
+      {loading ? (
+        <p className="text-center my-4 text-lg animate-pulse">Đang tìm kiếm...</p>
+      ) : results.length > 0 ? (
         <MovieSection
           title={`Kết quả cho: "${query}"`}
           movies={results}
@@ -72,7 +76,7 @@ export default function SearchClient() {
           basePath={`/search?query=${encodeURIComponent(query)}`}
         />
       ) : (
-        <p className="text-center my-4 text-2xl">Không tìm thấy kết quả.</p>
+        <p className="text-center my-8 text-base md:text-xl">Từ khóa bạn tìm không đúng vui lòng nhập đúng tên phim.😢</p>
       )}
     </div>
   );

@@ -50,7 +50,7 @@ export default async function TrungQuocPage({ searchParams }: { searchParams: Pr
 
   return (
     <MovieSection
-      title="List Phim Trung Quốc"
+      title="List Phim Sex Trung Quốc"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

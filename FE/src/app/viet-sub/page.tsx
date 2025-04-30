@@ -50,7 +50,7 @@ export default async function VietSubPage({ searchParams }: { searchParams: Prom
 
   return (
     <MovieSection
-      title="List Phim Vietsub"
+      title="List Phim Sex Vietsub"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

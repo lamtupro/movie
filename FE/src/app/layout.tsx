@@ -33,13 +33,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased md:px-10 `}
-      >
-        <GoogleAnalytics/>
-        <Navbar/>
-        {children}
-       {/*  <Banner/> */}
-        <Footer/>
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col `}
+      ><Navbar />
+      <GoogleAnalytics />
+        <main className="flex-1">   
+          {children}
+          <Banner />
+        </main>
+        <Footer />
       </body>
     </html>
   );

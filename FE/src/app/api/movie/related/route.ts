@@ -5,7 +5,7 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const movie = body.movie
 
-    const categories = ['vietsub', 'han_quoc', 'nhat_ban', 'us', 'trung_quoc']
+    const categories = ['gai_xinh','vietsub', 'han_quoc', 'nhat_ban', 'us', 'trung_quoc']
     let selectedCategory = ''
 
     for (const category of categories) {
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
 
     // Trộn và lấy 6 phim ngẫu nhiên
     const shuffled = relatedMovies.sort(() => 0.5 - Math.random())
-    const selected = shuffled.slice(0, 6)
+    const selected = shuffled.slice(0, 8)
 
     return NextResponse.json({ data: selected })
   } catch (err) {

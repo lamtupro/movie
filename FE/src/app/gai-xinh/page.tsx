@@ -48,7 +48,7 @@ export default async function GaiXinhPage({ searchParams }: { searchParams: Prom
 
   return (
     <MovieSection
-      title="List Phim Gái Xinh"
+      title="List Phim Sex Gái Xinh"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

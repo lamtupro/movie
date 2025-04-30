@@ -66,50 +66,47 @@ const Navbar = () => {
           height={120}
         /></Link>
       </div>
-      <nav>
-        <div className="container mx-auto flex gap-4 items-center justify-between px-4">
-          {/* Logo */}
-
-          <div className="flex items-start ">
-            <ul className="flex relative flex-wrap gap-x-3 text-sm gap-y-2 md:text-base">
-              {navItems.map((item) => (
-                <Link key={item.href} href={item.href}>
-                  <li
-                    className={`cursor-pointer md:p-2 p-1 rounded-lg
+      <nav className=" py-3">
+  <div className="container mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+    {/* Nav Menu */}
+    <ul className="flex flex-wrap gap-x-3 gap-y-2 text-sm md:text-base">
+      {navItems.map((item) => (
+        <Link key={item.href} href={item.href}>
+          <li
+            className={`cursor-pointer px-3 py-1 md:px-4 md:py-2 rounded-lg 
               ${pathname === item.href
-                        ? 'bg-red-500 ' // ✅ active style
-                        : 'bg-zinc-800 hover:text-gray-400' // 🔲 normal style
-                      }`}
-                  >
-                    {item.label}
-                  </li>
-                </Link>
-              ))}
-            </ul>
+                ? 'bg-red-500'
+                : 'bg-zinc-800 hover:text-gray-400'}
+            `}
+          >
+            {item.label}
+          </li>
+        </Link>
+      ))}
+    </ul>
 
-          </div>
+    {/* Search Box */}
+    <div className="relative md:mt-1 mt-4 w-full md:w-auto">
+      <input
+        type="text"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        onKeyDown={handleSearch}
+        placeholder="Tìm kiếm theo tên..."
+        className="bg-[#1C1C1F] text-gray-300 rounded-full py-2 px-4 w-full md:w-64 focus:outline-none"
+      />
+      <FiSearch
+        className="absolute right-4 top-2.5 text-gray-400 cursor-pointer"
+        onClick={() => {
+          if (search.trim() !== "") {
+            router.push(`/search?query=${encodeURIComponent(search.trim())}`);
+          }
+        }}
+      />
+    </div>
+  </div>
+</nav>
 
-          {/* Search Box */}
-          <div className="relative md:flex hidden ">
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={handleSearch}
-              placeholder="Tìm kiếm..."
-              className="bg-[#1C1C1F] text-gray-300 rounded-full py-2 px-4 w-64 focus:outline-none"
-            />
-            <FiSearch
-              className="absolute right-3 top-2.5 text-gray-400 cursor-pointer"
-              onClick={() => {
-                if (search.trim() !== "") {
-                  router.push(`/search?query=${encodeURIComponent(search.trim())}`);
-                }
-              }}
-            />
-          </div>
-        </div>
-      </nav>
 
       {/* -------------------------------BANNER----------------------------------- */}
       <div className="container relative mx-auto flex flex-col gap-4 px-4 my-4">
@@ -144,7 +141,7 @@ const Navbar = () => {
           );
         })}
       </div>
-      <hr className="border-gray-500 mt-8 " />
+      <hr className="border-gray-500 " />
     </div>
   )
 }
