@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
     ], 
     domains: [
       'authentic-star-bb10cc4ffe.media.strapiapp.com', // Thêm domain Strapi của bạn vào đây
-      'quanly.quoclamtu.live', // Các domain khác nếu có
+      'quanly.quoclamtu.live', // Các domain khác nếu có , KHAI BÁO ĐỂ KO BỊ CHẶN
     ],
   },
 };

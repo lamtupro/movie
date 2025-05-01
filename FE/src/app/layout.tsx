@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Banner from "../components/Banner";
 import GoogleAnalytics from "../components/Googleanalytics";
 import Head from "next/head";
+import MaintenancePage from "./bao-tri/page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +31,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isMaintenanceMode = process.env.MAINTENANCE_MODE === 'true';
+  if(isMaintenanceMode){
+    return(
+      <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}>
+        <MaintenancePage /> {/* Chỉ hiển thị trang bảo trì */}
+      </body>
+    </html>
+    )
+  }
   return (
     <html lang="en">
       <body

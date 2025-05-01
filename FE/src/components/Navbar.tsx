@@ -133,6 +133,7 @@ const Navbar = () => {
                       alt={banner.name}
                       layout="fill"
                       className="rounded-lg"
+                      unoptimized  
                     />
                   </Link>
                 )}
