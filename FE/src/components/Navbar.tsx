@@ -67,45 +67,45 @@ const Navbar = () => {
         /></Link>
       </div>
       <nav className=" py-3">
-  <div className="container mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-    {/* Nav Menu */}
-    <ul className="flex flex-wrap gap-x-3 gap-y-2 text-sm md:text-base">
-      {navItems.map((item) => (
-        <Link key={item.href} href={item.href}>
-          <li
-            className={`cursor-pointer px-3 py-1 md:px-4 md:py-2 rounded-lg 
+        <div className="container mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          {/* Nav Menu */}
+          <ul className="flex flex-wrap gap-x-3 gap-y-2 text-sm md:text-base">
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href}>
+                <li
+                  className={`cursor-pointer px-3 py-1 md:px-4 md:py-2 rounded-lg 
               ${pathname === item.href
-                ? 'bg-red-500'
-                : 'bg-zinc-800 hover:text-gray-400'}
+                      ? 'bg-red-500'
+                      : 'bg-zinc-800 hover:text-gray-400'}
             `}
-          >
-            {item.label}
-          </li>
-        </Link>
-      ))}
-    </ul>
+                >
+                  {item.label}
+                </li>
+              </Link>
+            ))}
+          </ul>
 
-    {/* Search Box */}
-    <div className="relative md:mt-1 mt-4 w-full md:w-auto">
-      <input
-        type="text"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        onKeyDown={handleSearch}
-        placeholder="Tìm kiếm theo tên..."
-        className="bg-[#1C1C1F] text-gray-300 rounded-full py-2 px-4 w-full md:w-64 focus:outline-none"
-      />
-      <FiSearch
-        className="absolute right-4 top-2.5 text-gray-400 cursor-pointer"
-        onClick={() => {
-          if (search.trim() !== "") {
-            router.push(`/search?query=${encodeURIComponent(search.trim())}`);
-          }
-        }}
-      />
-    </div>
-  </div>
-</nav>
+          {/* Search Box */}
+          <div className="relative md:mt-1 mt-4 w-full md:w-auto">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={handleSearch}
+              placeholder="Tìm kiếm theo tên..."
+              className="bg-[#1C1C1F] text-gray-300 rounded-full py-2 px-4 w-full md:w-64 focus:outline-none"
+            />
+            <FiSearch
+              className="absolute right-4 top-2.5 text-gray-400 cursor-pointer"
+              onClick={() => {
+                if (search.trim() !== "") {
+                  router.push(`/search?query=${encodeURIComponent(search.trim())}`);
+                }
+              }}
+            />
+          </div>
+        </div>
+      </nav>
 
 
       {/* -------------------------------BANNER----------------------------------- */}
@@ -133,7 +133,7 @@ const Navbar = () => {
                       alt={banner.name}
                       layout="fill"
                       className="rounded-lg"
-                      unoptimized  
+                      unoptimized
                     />
                   </Link>
                 )}
@@ -143,6 +143,7 @@ const Navbar = () => {
         })}
       </div>
       <hr className="border-gray-500 " />
+      
     </div>
   )
 }
