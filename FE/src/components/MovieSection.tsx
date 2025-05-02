@@ -91,7 +91,7 @@ const MovieSection = ({
             return (
               <Link href={`/${movie.slug}`} key={movie.id} title={movie.name}>
                 <div className="relative group overflow-hidden rounded-lg text-sm">
-                  <Image
+                  <img
                     src={srcImg}
                     alt={movie.name}
                     width={300}
@@ -99,6 +99,7 @@ const MovieSection = ({
                     loading="lazy"
                     className="w-full h-40 md:h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
                   />
+
                   {movie.title && (
                     <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
                       {movie.title}

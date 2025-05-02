@@ -43,7 +43,7 @@ export default function SearchClient() {
       try {
         const res = await fetch(
           `/api/movie/search?query=${encodeURIComponent(queryParam)}&page=${page}`,
-          { cache: 'no-store' }
+          
         );
 
         const data = await res.json();
