@@ -15,7 +15,7 @@ export async function GET(
       headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
       },
-      next: { revalidate: 3600 }
+      
     })
 
     if (!res.ok) {
