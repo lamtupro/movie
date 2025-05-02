@@ -7,7 +7,7 @@ const getActress = async (slug: string) => {
   try {
     const res = await fetch(
       `${process.env.STRAPI_API_URL}/api/actresses?filters[slug][$eq]=${slug}`,
-      { cache: 'no-store' }
+      {next: { revalidate: 3600 } }
     );
 
     if (!res.ok) throw new Error('Lỗi khi lấy dữ liệu diễn viên');
@@ -28,7 +28,7 @@ const getMoviesByActress = async (actressId: number, page: number) => {
       { headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
       },
-       cache: 'no-store' }
+      next: { revalidate: 3600 } }
     );
 
     if (!res.ok) throw new Error('Lỗi khi lấy danh sách phim');

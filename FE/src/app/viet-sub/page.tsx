@@ -17,7 +17,7 @@ const getMovies = async (page: number) => {
         headers: {
           Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,  // Thêm dòng này
         },
-         cache: 'no-store'
+        next: { revalidate: 3600 }
       }
     );
 

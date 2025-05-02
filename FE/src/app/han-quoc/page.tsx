@@ -16,7 +16,7 @@ const getMovies = async (page: number) => {
       { headers: {
         Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
       },
-       cache: 'no-store' }
+      next: { revalidate: 3600 } }
     );
 
     if (!res.ok) throw new Error('Fetch failed');
