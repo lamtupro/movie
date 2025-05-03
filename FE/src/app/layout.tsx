@@ -49,7 +49,7 @@ export default function RootLayout({
       <GoogleAnalytics />
         <main className="flex-1">   
           {children}
-          <Banner />
+          {/* <Banner /> */}
         </main>
         <Footer />
       </body>

@@ -37,7 +37,7 @@ const Navbar = () => {
       router.push(`/search?query=${encodeURIComponent(search.trim())}`);
     }
   };
-  useEffect(() => {
+  /* useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/banners?filters[banner_top][$eq]=true&populate=*`,)
       .then(res => res.json())
       .then(data => {
@@ -53,7 +53,7 @@ const Navbar = () => {
         console.error('Lỗi fetch banner:', err);
         setBanners([]); // fallback nếu lỗi mạng, v.v.
       });
-  }, []);
+  }, []); */
 
 
   return (
@@ -109,7 +109,7 @@ const Navbar = () => {
 
 
       {/* -------------------------------BANNER----------------------------------- */}
-      <div className="container relative mx-auto flex flex-col gap-4 px-4 my-4">
+    {/*   <div className="container relative mx-auto flex flex-col gap-4 px-4 my-4">
         {banners.map((banner: any, index) => {
           const imageUrl = `${process.env.STRAPI_API_URL}${banner.image?.url}`;
 
@@ -141,7 +141,7 @@ const Navbar = () => {
             </div>
           );
         })}
-      </div>
+      </div> */}
       <hr className="border-gray-500 " />
       
     </div>

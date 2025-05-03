@@ -50,6 +50,7 @@ const Slug = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ movie }),
+        next: { revalidate: 3600 }
       })
   
       const data = await res.json()

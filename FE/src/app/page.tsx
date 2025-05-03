@@ -1,10 +1,7 @@
 import MovieSection from '@/src/components/MovieSection'
 import { Metadata } from 'next'
 
-export const metadata: Metadata = {
-  title: 'Tổng hợp phim sex mới nhất | Xem phim sex miễn phí',
-  description: 'Tổng hợp các bộ phim sex chất lượng cao, cập nhật liên tục. Xem phim sex HD miễn phí tại quoclamtu.live .',
-};
+
 
 const pageSize = 20;
 
