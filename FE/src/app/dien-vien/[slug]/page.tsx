@@ -7,7 +7,11 @@ const getActress = async (slug: string) => {
   try {
     const res = await fetch(
       `${process.env.STRAPI_API_URL}/api/actresses?filters[slug][$eq]=${slug}`,
-      {next: { revalidate: 3600 } }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+        },
+        next: { revalidate: 3600 } }
     );
 
     if (!res.ok) throw new Error('Lỗi khi lấy dữ liệu diễn viên');
