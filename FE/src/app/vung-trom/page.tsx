@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim sex vụng trộm mới nhất | Xem phim sex Vụng trộm miễn phí',
+  title: 'Phim sex vụng trộm mới nhất | Xem phim sex vụng trộm miễn phí',
   description: 'Tổng hợp các bộ phim sex vụng trộm chất lượng cao, cập nhật liên tục. Xem phim sex vụng trộm HD miễn phí tại quoclamtu.live .',
 };
 

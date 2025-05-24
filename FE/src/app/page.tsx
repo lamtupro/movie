@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-  title: 'Tổng hợp phim sex mới nhất | Xem phim sex hay chỉ có ở quốc lâm tự live',
-  description: 'Tổng hợp các bộ phim sex chất lượng cao, cập nhật liên tục. Xem phim sex HD miễn phí tại quoclamtu.live .',
+  title: 'Tổng hợp phim sex mới nhất | Phim Mới, Hay Nhất 2025 – quoclamtu.live',
+  description: 'Trang web xem phim online chất lượng cao, cập nhật phim mới mỗi ngày. Không Che, Vietsub, Âu Mỹ, Hàn Quốc, Nhật Bản đầy đủ – xem nhanh, không quảng cáo tại quoclamtu.live .',
 };
 
 const pageSize = 20;
