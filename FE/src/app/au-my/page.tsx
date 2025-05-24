@@ -1,10 +1,10 @@
 import MovieSection from '@/src/components/MovieSection'
 import { Metadata } from 'next'
 
-// Cấu hình SEO cho trang Vietsub
+// Cấu hình SEO cho trang Âu Mỹ
 export const metadata: Metadata = {
-  title: 'Phim sex âu mỹ mới nhất | Xem phim sex âu mỹ miễn phí',
-  description: 'Tổng hợp các bộ phim sex âu mỹ chất lượng cao, cập nhật liên tục. Xem phim sex âu mỹ HD miễn phí tại quoclamtu.live .',
+  title: 'Phim sex Âu Mỹ mới nhất | Xem phim sex Châu Âu, Mỹ series chất lượng',
+  description: 'Tổng hợp các bộ phim sex Âu Mỹ với nhiều diễn viên nổi tiếng Eva Elife, Melody Mark.  Cập nhật phim mới nhanh chóng, xem miễn phí tại quoclamtu.live .',
 };
 
 const pageSize = 20; // Số phim mỗi trang

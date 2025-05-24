@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim sex nhật bản mới nhất | Xem phim sex nhật bản miễn phí',
-  description: 'Tổng hợp các bộ phim sex nhật bản chất lượng cao, cập nhật liên tục. Xem phim sex nhật bản HD miễn phí tại quoclamtu.live .',
+  title: 'Phim sex Nhật Bản đặc sắc  | Xem phim sex Nhật Bản hay nhất hiện nay',
+  description: 'Khám phá kho phim Nhật Bản đa dạng thể loại: Vụng Trộm, Hiếp Dâm, Tập Thể. Cập nhật phim sex Nhật mới nhanh nhất, chất lượng HD tại quoclamtu.live .',
 };
 
 const pageSize = 20; // Số phim mỗi trang

@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim sex không che mới nhất | Xem phim sex không che miễn phí',
-  description: 'Tổng hợp các bộ phim sex không che chất lượng cao, cập nhật liên tục. Xem phim sex không che HD miễn phí tại quoclamtu.live .',
+  title: 'Kho phim sex không che nổi tiếng | Xem phim sex không che chất lượng cao',
+  description: 'Tổng hợp các bộ phim sex không che của diễn viên xinh đẹp nổi tiếng. càng xem càng cuốn với chất lượng HD và miễn phí tại quoclamtu.live .',
 };
 
 const pageSize = 20; // Số phim mỗi trang

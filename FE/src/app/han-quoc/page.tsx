@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim sex hàn quốc mới nhất | Xem phim sex hàn quốc miễn phí',
-  description: 'Tổng hợp các bộ phim sex hàn quốc chất lượng cao, cập nhật liên tục. Xem phim sex hàn quốc HD miễn phí tại quoclamtu.live .',
+  title: 'Phim sex Hàn Quốc hot | Xem phim sex gái xinh Hàn Quốc',
+  description: 'Tuyển chọn phim sex Hàn Quốc hot nhất, phụ đề tiếng Việt chuẩn, cập nhật liên tục. Thưởng thức phim Hàn sex HD chất lượng cao tại quoclamtu.live .',
 };
 
 const pageSize = 20; // Số phim mỗi trang

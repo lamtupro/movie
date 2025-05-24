@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-  title: 'Tổng hợp phim sex mới nhất | Xem phim sex miễn phí',
+  title: 'Tổng hợp phim sex mới nhất | Xem phim sex hay chỉ có ở quốc lâm tự live',
   description: 'Tổng hợp các bộ phim sex chất lượng cao, cập nhật liên tục. Xem phim sex HD miễn phí tại quoclamtu.live .',
 };
 

@@ -3,8 +3,8 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim sex gái xinh mới nhất | Xem phim sex gái xinh miễn phí',
-  description: 'Tổng hợp các bộ phim sex gái xinh chất lượng cao, cập nhật liên tục. Xem phim sex gái xinh HD miễn phí tại quoclamtu.live .',
+  title: 'Tổng hợp phim sex gái xinh mới nhất | Xem phim sex gái xinh tuyển chọn',
+  description: 'Tổng hợp các bộ phim sex gái xinh từ Nhật, Hàn, Âu Mỹ,... cập nhật liên tục hàng ngày chỉ có tại quoclamtu.live .',
 };
 
 const pageSize = 20; // Số phim mỗi trang

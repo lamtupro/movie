@@ -3,20 +3,28 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim sex hay nhất | Xem phim sex hay miễn phí',
-  description: 'Tổng hợp các bộ phim sex hay chất lượng cao, cập nhật liên tục. Xem phim sex hay HD miễn phí tại quoclamtu.live .',
+  title: 'Top 100 phim sex hay nhất | Xem phim hot miễn phí chất lượng cao',
+  description: 'Tổng hợp 100 bộ phim sex hay nhất được xem nhiều nhất, cập nhật liên tục. Xem phim sex HD miễn phí nhanh, mượt tại quoclamtu.live .',
 };
 
 const pageSize = 20; // Số phim mỗi trang
+const maxPages = 5; // Chỉ lấy tối đa 5 trang => 100 phim
 
 const getMovies = async (page: number) => {
+  // Giới hạn số trang tối đa
+  if (page > maxPages) {
+    return { movies: [], total: pageSize * maxPages };
+  }
+
   try {
     const res = await fetch(
       `${process.env.STRAPI_API_URL}/api/movies?populate=*&sort=views:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
-      { headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-      },
-      next: { revalidate: 3600 } }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+        },
+        next: { revalidate: 3600 },
+      }
     );
 
     if (!res.ok) throw new Error('Fetch failed');
@@ -24,7 +32,7 @@ const getMovies = async (page: number) => {
     const data = await res.json();
     return {
       movies: data.data || [],
-      total: data.meta?.pagination?.total || 0,
+      total: Math.min(data.meta?.pagination?.total || 0, pageSize * maxPages), // giới hạn tối đa 100 phim
     };
   } catch (err) {
     console.error('❌ Lỗi fetch phim hay:', err);
@@ -32,9 +40,14 @@ const getMovies = async (page: number) => {
   }
 };
 
-export default async function PhimHayPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+export default async function PhimHayPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
   const searchParamsResolved = await searchParams;
-  const currentPage = parseInt(searchParamsResolved.page || '1', 10) || 1;
+  const currentPage = Math.min(parseInt(searchParamsResolved.page || '1', 10) || 1, maxPages); // không cho vượt trang 5
+
   const { movies, total } = await getMovies(currentPage);
   const totalPages = Math.ceil(total / pageSize);
 
@@ -56,4 +69,5 @@ export default async function PhimHayPage({ searchParams }: { searchParams: Prom
     />
   );
 }
+
 
