@@ -87,7 +87,7 @@ const MovieSection = ({
         <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-y-4 md:gap-y-8 gap-x-4">
           {movies.map((movie) => {
             const imgUrl = movie.image?.url;
-            const srcImg = imgUrl.startsWith('http') ? imgUrl : process.env.NEXT_PUBLIC_STRAPI_URL + imgUrl;
+            const srcImg = imgUrl.startsWith('http') ? imgUrl : process.env.NEXT_PUBLIC_STRAPI_API_URL + imgUrl;
             return (
               <Link href={`/${movie.slug}`} key={movie.id} title={movie.name}>
                 <div className="relative group overflow-hidden rounded-lg text-sm">
