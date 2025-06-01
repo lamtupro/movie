@@ -24,24 +24,24 @@ const Slug = () => {
       const data = await res.json()
       const movieList = data.data || []
       setMovies(movieList)
-  
+
       if (movieList.length > 0) {
         const movie = movieList[0]
         const movieId = movie.documentId  // ✅ Sử dụng ID từ Strapi
         const currentViews = Number(movie.views || 0)
-  
+
         await axios.put('/api/movie/reactions', {
           movieId,
           views: currentViews + 1,
         })
         fetchRelatedMovies(movie)
       }
-      
+
     } catch (err) {
       console.error("Error fetching movie or updating views:", err)
     }
   }
-  
+
   const fetchRelatedMovies = async (movie: any) => {
     try {
       const res = await fetch('/api/movie/related', {
@@ -52,10 +52,10 @@ const Slug = () => {
         body: JSON.stringify({ movie }),
         next: { revalidate: 3600 }
       })
-  
+
       const data = await res.json()
       const related = data.data || []
-  
+
       setRelatedMovies(related)
     } catch (err) {
       console.error('Error fetching related movies:', err)
@@ -185,7 +185,7 @@ const Slug = () => {
           </div>
         </div>
 
-        <br /> 
+        <br />
         {movie.code && (
           <div className="my-4">
             <h2 className="text-lg font-semibold text-white">Code:</h2>
@@ -198,23 +198,23 @@ const Slug = () => {
           <div className="my-4">
             <h2 className="text-lg font-semibold text-white mb-2">Diễn viên:</h2>
             <ul className="flex flex-wrap gap-2">
-            
+
               {movie.actresses.map((actress: any) => (
                 <Link href={`/dien-vien/${actress.slug}`} key={movie.documentId}>
-                <li key={actress.documentId}>
-                  <span className="inline-block bg-zinc-700 text-white px-3 py-1 rounded-full text-sm hover:bg-red-5 00 transition">
-                    {actress.name}
-                  </span>
-                </li> 
-                 </Link>
+                  <li key={actress.documentId}>
+                    <span className="inline-block bg-zinc-700 text-white px-3 py-1 rounded-full text-sm hover:bg-red-5 00 transition">
+                      {actress.name}
+                    </span>
+                  </li>
+                </Link>
               ))}
-            
-              
+
+
             </ul>
           </div>
         )}
 
-       
+
         {movie.description && (
           <div className="my-8">
             <h2 className="text-lg font-semibold mb-2">Nội dung phim</h2>
@@ -226,39 +226,43 @@ const Slug = () => {
       <div className="my-16 max-w-4xl w-full md:mx-auto px-2">
         <h2 className="text-white text-base md:text-xl mb-4">Các Phim Với Nội Dung Tương Tự:</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {relatedMovies.map((relatedMovie: any) => (
+          {relatedMovies.map((relatedMovie: any) => {
+            const imgUrl = relatedMovie.image?.url;
+            const srcImg = imgUrl.startsWith('http') ? imgUrl : process.env.NEXT_PUBLIC_STRAPI_API_URL + imgUrl;
+            return (
 
-            <Link href={`/${relatedMovie.slug}`} key={relatedMovie.documentId}>
-              <div className="relative group overflow-hidden rounded-lg text-sm">
-                <img
-                  src={relatedMovie.image?.url}
-                  alt={relatedMovie.title}
-                  width={300}
-                  height={200}
-                  className="w-full md:h-48 sm:40 h-32 object-cover rounded-lg transition-transform group-hover:scale-105"
-                />
-                {relatedMovie.title && (
-                  <span className="absolute top-2 left-2 bg-red-600  text-white text-xs px-2 py-1 rounded-xl">
-                    {relatedMovie.title || ''}
-                  </span>
-                )}
+              <Link href={`/${relatedMovie.slug}`} key={relatedMovie.documentId}>
+                <div className="relative group overflow-hidden rounded-lg text-sm">
+                  <img
+                    src={srcImg}
+                    alt={relatedMovie.title}
+                    width={300}
+                    height={200}
+                    className="w-full md:h-48 sm:40 h-32 object-cover rounded-lg transition-transform group-hover:scale-105"
+                  />
+                  {relatedMovie.title && (
+                    <span className="absolute top-2 left-2 bg-red-600  text-white text-xs px-2 py-1 rounded-xl">
+                      {relatedMovie.title || ''}
+                    </span>
+                  )}
 
-                <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 md:gap-4 bg-black bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
-                  <div className='flex items-center gap-1'>
-                    {formatNumber(relatedMovie.views || 0)}<IoEye />
+                  <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 md:gap-4 bg-black bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
+                    <div className='flex items-center gap-1'>
+                      {formatNumber(relatedMovie.views || 0)}<IoEye />
+                    </div>
+                    <div className='flex items-center gap-1'>
+                      {formatNumber(relatedMovie.likes || 0)} <BiLike />
+                    </div>
+
                   </div>
-                  <div className='flex items-center gap-1'>
-                    {formatNumber(relatedMovie.likes || 0)} <BiLike />
-                  </div>
+                </div>
+                <div className="bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
+                  {relatedMovie.name}
 
                 </div>
-              </div>
-              <div className="bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
-                {relatedMovie.name}
-
-              </div>
-            </Link>
-          ))}
+              </Link>
+            )
+          })}
         </div>
       </div>
     </>

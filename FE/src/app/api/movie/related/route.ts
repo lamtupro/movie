@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
         }
       }
     )
-
+console.log(strapiRes,"api")
     const result = await strapiRes.json()
     const relatedMovies = result.data || []
 
