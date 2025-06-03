@@ -120,6 +120,7 @@ const Slug = () => {
   return (
     <>
       <Head>
+        <link rel="canonical" href={`https://quoclamtu.live/${slug}`} />
         <title>{movie.name} | Xem phim chất lượng cao</title>
         <meta name="description" content={movie.description || "Xem phim sex chất lượng, tốc độ cao, không quảng cáo"} />
         <meta property="og:title" content={movie.name} />
@@ -200,8 +201,8 @@ const Slug = () => {
             <ul className="flex flex-wrap gap-2">
 
               {movie.actresses.map((actress: any) => (
-                <Link href={`/dien-vien/${actress.slug}`} key={movie.documentId}>
-                  <li key={actress.documentId}>
+                <Link href={`/dien-vien/${actress.slug}`} key={actress.documentId}>
+                  <li>
                     <span className="inline-block bg-zinc-700 text-white px-3 py-1 rounded-full text-sm hover:bg-red-5 00 transition">
                       {actress.name}
                     </span>

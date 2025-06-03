@@ -1,7 +1,7 @@
 import MovieSection from '@/src/components/MovieSection';
+import { Metadata } from 'next';
 
 const pageSize = 20; // 20 phim mỗi trang
-
 // Hàm fetch thông tin diễn viên
 const getActress = async (slug: string) => {
   try {
@@ -11,7 +11,8 @@ const getActress = async (slug: string) => {
         headers: {
           Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
         },
-        next: { revalidate: 3600 } }
+        next: { revalidate: 3600 }
+      }
     );
 
     if (!res.ok) throw new Error('Lỗi khi lấy dữ liệu diễn viên');
@@ -24,15 +25,34 @@ const getActress = async (slug: string) => {
   }
 };
 
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const resolvedParams = await params; // Đây là điểm mới quan trọng
+  const slug = resolvedParams.slug;
+
+  const actress = await getActress(slug);
+
+  const name = actress.name || 'Diễn viên';
+  return {
+    title: `Xem phim ${name} | Phim sex 18+ của diễn viên ${name} hot nhất`,
+    description: `Tuyển chọn phim hot nhất của ${name}, chất lượng cao, cập nhật liên tục.`,
+    alternates: {
+      canonical: `https://quoclamtu.live/dien-vien/${slug}`,
+    },
+  };
+}
 // Hàm fetch phim của 1 diễn viên
 const getMoviesByActress = async (actressId: number, page: number) => {
   try {
     const res = await fetch(
       `${process.env.STRAPI_API_URL}/api/movies?populate=*&filters[actresses][id][$eq]=${actressId}&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
-      { headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-      },
-      next: { revalidate: 3600 } }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+        },
+        next: { revalidate: 3600 }
+      }
     );
 
     if (!res.ok) throw new Error('Lỗi khi lấy danh sách phim');
