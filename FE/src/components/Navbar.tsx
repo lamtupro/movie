@@ -42,7 +42,7 @@ const Navbar = () => {
       .then(res => res.json())
       .then(data => {
         // Nếu trả về đúng định dạng và có mảng data
-         console.log('Banner data:', data);
+        console.log('Banner data:', data);
         if (Array.isArray(data?.data)) {
           setBanners(data.data);
         } else {
@@ -114,16 +114,14 @@ const Navbar = () => {
         {banners.map((banner: any, index) => {
           const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${banner.image_url?.url}`;
           return (
-            <div key={index } className="relative w-full md:h-32 h-16 flex flex-col gap-2 rounded-lg">
+            <div key={index} className="relative w-full md:h-32 h-16 flex flex-col gap-2 rounded-lg">
               <div className="relative w-full h-32 rounded-lg hover:scale-105 transition-transform duration-300">
                 {banner.image_url && (
-                  <Link href={`${banner.link}`} target="_blank" onClick={() => {
+                  <a href={`${banner.link}`} target="_blank" rel="noopener noreferrer" onClick={() => {
                     if (typeof window !== "undefined" && window.gtag) {
                       window.gtag('event', 'click_QC_tren', {
-                        event_category: 'Ads',
                         banner_id: banner.documentId,
                         ten_NC: banner.name || 'Unnamed Banner',
-                        value: 1,
                         banner_link: banner.link
                       });
                     }
@@ -135,7 +133,7 @@ const Navbar = () => {
                       className="rounded-lg"
                       unoptimized
                     />
-                  </Link>
+                  </a>
                 )}
               </div>
             </div>
@@ -143,7 +141,7 @@ const Navbar = () => {
         })}
       </div>
       <hr className="border-gray-500 " />
-      
+
     </div>
   )
 }
