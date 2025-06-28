@@ -42,6 +42,7 @@ const Navbar = () => {
       .then(res => res.json())
       .then(data => {
         // Nếu trả về đúng định dạng và có mảng data
+         console.log('Banner data:', data);
         if (Array.isArray(data?.data)) {
           setBanners(data.data);
         } else {
@@ -111,10 +112,9 @@ const Navbar = () => {
       {/* -------------------------------BANNER----------------------------------- */}
       <div className="container relative mx-auto flex flex-col gap-4 px-4 my-4">
         {banners.map((banner: any, index) => {
-          const imageUrl = `${process.env.STRAPI_API_URL}${banner.image?.url}`;
-
+          const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${banner.image_url?.url}`;
           return (
-            <div key={index} className="relative w-full md:h-32 h-16 flex flex-col gap-2 rounded-lg">
+            <div key={index } className="relative w-full md:h-32 h-16 flex flex-col gap-2 rounded-lg">
               <div className="relative w-full h-32 rounded-lg hover:scale-105 transition-transform duration-300">
                 {banner.image_url && (
                   <Link href={`${banner.link}`} target="_blank" onClick={() => {
@@ -129,7 +129,7 @@ const Navbar = () => {
                     }
                   }}>
                     <Image
-                      src={banner.image_url.url || ""}
+                      src={imageUrl || ""}    /* src={banner.image_url.url || ""} */
                       alt={banner.name}
                       layout="fill"
                       className="rounded-lg"
