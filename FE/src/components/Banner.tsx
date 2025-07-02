@@ -35,8 +35,8 @@ const Banner = () => {
   return (
     <div className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2  w-10/12 ">
 
-      {banners.map((banner: any, index) => {/* 
-        const imageUrl = `${process.env.STRAPI_API_URL}${banner.image?.url}`; */
+      {banners.map((banner: any, index) => {
+        const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${banner.image_url?.url}`;
 
         return (
           <div
@@ -59,7 +59,7 @@ const Banner = () => {
               }}
             >
               <Image
-                src={banner.image_url.url || ''}
+                src={imageUrl || ''} /* src={banner.image_url.url || ""} */
                 alt={banner.name}
                 layout="fill"
                 className="rounded-lg"
