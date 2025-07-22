@@ -54,7 +54,7 @@ export default async function VietSubPage({ searchParams }: { searchParams: Prom
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}
-      basePath="/vietsub"
+      basePath="/viet-sub"
     />
   );
 }

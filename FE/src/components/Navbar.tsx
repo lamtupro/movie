@@ -30,6 +30,7 @@ const Navbar = () => {
     { href: '/tap-the', label: 'Tập Thể' },
     { href: '/vung-trom', label: 'Vụng Trộm' },
     { href: '/hiep-dam', label: 'Hiếp Dâm' },
+    /* { href: '/dien-vien', label: 'Diễn Viên' } */
   ]
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
