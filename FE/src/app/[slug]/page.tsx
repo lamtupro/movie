@@ -264,7 +264,7 @@ const Slug = () => {
 
         {movie.description && (
           <div className="my-8">
-            <h2 className="text-lg font-semibold mb-2">Nội dung phim</h2>
+            <h2 className="text-lg font-semibold mb-2 text-[#FEA016]">Nội dung phim</h2>
             <p className="text-sm text-zinc-300 leading-relaxed">{movie.description}</p>
           </div>
         )}
