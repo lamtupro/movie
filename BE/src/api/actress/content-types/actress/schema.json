@@ -37,6 +37,9 @@
     },
     "display": {
       "type": "boolean"
+    },
+    "views": {
+      "type": "integer"
     }
   }
 }

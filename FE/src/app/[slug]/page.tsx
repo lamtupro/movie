@@ -9,6 +9,8 @@ import formatNumber from '@/src/regret/formatNumber'
 import VideoPlayer from '@/src/components/VideoPlayer'
 import Link from 'next/link'
 import Head from 'next/head'
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import Image from 'next/image'
 
 
 const Slug = () => {
@@ -17,6 +19,7 @@ const Slug = () => {
   const [activeLinks, setActiveLinks] = useState<{ [key: number]: string }>({})
   const [reactionStatus, setReactionStatus] = useState<{ [key: number]: 'like' | 'dislike' | null }>({})
   const [relatedMovies, setRelatedMovies] = useState<any[]>([])
+  const [banners, setBanners] = useState([])
 
   const fetchMovie = async () => {
     try {
@@ -62,8 +65,26 @@ const Slug = () => {
     }
   }
   useEffect(() => {
-    fetchMovie()
-  }, [slug])
+  const fetchData = async () => {
+    await fetchMovie();
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/banners?filters[banner_below_video][$eq]=true&populate=*`);
+      const data = await res.json();
+
+      if (Array.isArray(data?.data)) {
+        setBanners(data.data);
+      } else {
+        setBanners([]);
+      }
+    } catch (err) {
+      console.error('Lỗi fetch banner:', err);
+      setBanners([]);
+    }
+  };
+
+  fetchData();
+}, [slug]);
 
   const handleLinkChange = (id: number, link: string) => {
     setActiveLinks(prev => ({ ...prev, [id]: link }))
@@ -117,12 +138,14 @@ const Slug = () => {
   if (!movies.length) return <p className="text-white text-center my-16">Loading...</p>
 
   const movie = movies[0]
+
+
   return (
     <>
       <Head>
         <link rel="canonical" href={`https://quoclamtu.live/${slug}`} />
         <title>{movie.name} | Xem phim chất lượng cao</title>
-        <meta name="description" content={movie.description || "Xem phim sex chất lượng, tốc độ cao, không quảng cáo"} />
+        <meta name="description" content={movie.description || "Xem phim sex VLXX chất lượng, tốc độ cao, không quảng cáo"} />
         <meta property="og:title" content={movie.name} />
         <meta property="og:description" content={movie.description || "Phim hấp dẫn, nội dung lôi cuốn"} />
         {movie.image?.url && <meta property="og:image" content={movie.image.url} />}
@@ -139,20 +162,21 @@ const Slug = () => {
         ) : (
           <p>Không có video</p>
         )}
-        <div className='flex flex-col md:flex-row gap-4 justify-between'>
-          <div className="flex space-x-2 mt-4">
+
+        <div className='flex flex-wrap gap-4 justify-between'>
+          <div className="flex items-center space-x-2  mt-4">
             <button
-              className={`p-2 rounded ${activeLinks[movie.documentId] === movie.link_1 ? 'bg-blue-500' : 'bg-gray-700'} text-white`}
+              className={`p-2 rounded  ${activeLinks[movie.documentId] === movie.link_1 ? 'bg-gray-700' : 'bg-gray-700'} text-white`}
               onClick={() => handleLinkChange(movie.documentId, movie.link_1)}
             >
-              Link #1
+              #1
             </button>
             {movie.link_2 && (
               <button
                 className={`p-2 rounded ${activeLinks[movie.documentId] === movie.link_2 ? 'bg-blue-500' : 'bg-gray-700'} text-white`}
                 onClick={() => handleLinkChange(movie.documentId, movie.link_2)}
               >
-                Link #2
+                #2
               </button>
             )}
           </div>
@@ -186,24 +210,46 @@ const Slug = () => {
           </div>
         </div>
 
-        <br />
+        <div className="container relative mx-auto flex flex-col gap-4 px-4 my-4">
+          {banners.map((banner: any, index) => {
+            const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${banner.image_url?.url}`;
+            return (
+              <div key={index} className="relative w-full md:h-32 h-16 flex flex-col gap-2 rounded-lg">
+                <div className="relative w-full h-32 rounded-lg hover:scale-105 transition-transform duration-300">
+                  {banner.image_url && (
+                    <a href={`${banner.link}`} target="_blank" rel="noopener noreferrer"
+                    >
+                      <Image
+                        src={imageUrl || ""}    /* src={banner.image_url.url || ""} */
+                        alt={banner.name}
+                        layout="fill"
+                        className="rounded-lg"
+                        unoptimized
+                      />
+                    </a>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div> 
         {movie.code && (
           <div className="my-4">
-            <h2 className="text-lg font-semibold text-white">Code:</h2>
-            <span className="inline-block bg-zinc-800 text-white px-4 py-2 rounded-full text-sm tracking-wide shadow">
+            <h2 className="text-lg font-semibold text-[#FEA016]">Code:</h2>
+            <span className="inline-block bg-[#58585c] text-white px-4 py-2 rounded-full text-sm tracking-wide shadow">
               {movie.code}
             </span>
           </div>
         )}
         {movie.actresses && movie.actresses.length > 0 && (
           <div className="my-4">
-            <h2 className="text-lg font-semibold text-white mb-2">Diễn viên:</h2>
+            <h2 className="text-lg font-semibold text-[#FEA016] mb-2">Diễn viên:</h2>
             <ul className="flex flex-wrap gap-2">
 
               {movie.actresses.map((actress: any) => (
                 <Link href={`/dien-vien/${actress.slug}`} key={actress.documentId}>
                   <li>
-                    <span className="inline-block bg-zinc-700 text-white px-3 py-1 rounded-full text-sm hover:bg-red-5 00 transition">
+                    <span className="inline-block bg-[#58585c] text-white font-serif px-3 py-1 rounded-full text-sm hover:bg-red-5 00 transition">
                       {actress.name}
                     </span>
                   </li>
@@ -266,6 +312,15 @@ const Slug = () => {
           })}
         </div>
       </div>
+      <div className="flex justify-center my-6">
+        <Link
+          href="/"
+          className="flex items-center gap-2  bg-red-500 hover:bg-red-700 text-white font-medium py-2 px-5 rounded-3xl shadow-md transition duration-300 tracking-wide"
+        >
+          <IoArrowBackCircleOutline className='w-6 h-6' /> Trang chủ
+        </Link>
+      </div>
+
     </>
   )
 }

@@ -399,6 +399,7 @@ export interface ApiActressActress extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    views: Schema.Attribute.Integer;
   };
 }
 
@@ -414,6 +415,7 @@ export interface ApiBannerBanner extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    banner_below_video: Schema.Attribute.Boolean;
     banner_bot: Schema.Attribute.Boolean;
     banner_left: Schema.Attribute.Boolean;
     banner_right: Schema.Attribute.Boolean;
