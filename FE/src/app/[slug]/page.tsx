@@ -151,7 +151,7 @@ const Slug = () => {
         {movie.image?.url && <meta property="og:image" content={movie.image.url} />}
       </Head>
 
-      <main className="text-white mt-16 w-full max-w-4xl mx-auto my-4 px-2">
+      <main className="text-white mt-16 w-full container mx-auto my-4 px-2">
         <h1 className="my-8 text-xl font-semibold">{movie.name}</h1>
 
         {movie.link_1 || movie.link_2 ? (
@@ -184,7 +184,7 @@ const Slug = () => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center text-white">
               <IoEye className='w-6 h-6 mr-1' />
-              <span>{formatNumber(movie.views || 0)}</span>
+              <span>{formatNumber((Number(movie.views) || 0) + 200000)}</span>
             </div>
 
             <button onClick={() => handleReaction('like', movie.documentId)} className="flex items-center">
@@ -194,7 +194,7 @@ const Slug = () => {
                 <BiLike className="w-6 h-6 mr-1 " />
               )}
               <span className="text-white">
-                {formatNumber(movie.likes || 0)}
+                {formatNumber((Number(movie.likes) || 0) + 10000)}
               </span>
 
             </button>
@@ -205,12 +205,12 @@ const Slug = () => {
               ) : (
                 <BiDislike className="w-6 h-6 mr-1 " />
               )}
-              <span className="text-white">{formatNumber(movie.dislikes || 0)}</span>
+              <span className="text-white">{formatNumber((Number(movie.dislikes) || 0) + 500)}</span>
             </button>
           </div>
         </div>
 
-        <div className="container relative mx-auto flex flex-col gap-4 px-4 my-4">
+        <div className="container relative mx-auto flex flex-col gap-4 my-4">
           {banners.map((banner: any, index) => {
             const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${banner.image_url?.url}`;
             return (
@@ -270,7 +270,7 @@ const Slug = () => {
         )}
 
       </main>
-      <div className="my-16 max-w-4xl w-full md:mx-auto px-2">
+      <div className="my-16 container w-full md:mx-auto px-2">
         <h2 className="text-white text-base md:text-xl mb-4">Các Phim Với Nội Dung Tương Tự:</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {relatedMovies.map((relatedMovie: any) => {
@@ -295,10 +295,10 @@ const Slug = () => {
 
                   <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 md:gap-4 bg-black bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
                     <div className='flex items-center gap-1'>
-                      {formatNumber(relatedMovie.views || 0)}<IoEye />
+                      {formatNumber((Number(relatedMovie.views) || 0) + 200000)} <IoEye />
                     </div>
                     <div className='flex items-center gap-1'>
-                      {formatNumber(relatedMovie.likes || 0)} <BiLike />
+                      {formatNumber((Number(relatedMovie.likes) || 0) + 10000)} <BiLike />
                     </div>
 
                   </div>
