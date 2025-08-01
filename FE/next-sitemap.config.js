@@ -40,7 +40,7 @@ module.exports = {
     });
 
     // ✅ Fetch phim từ API
-    const pageSize = 100; // Tùy số lượng bạn muốn lấy
+    const pageSize = 700; // Tùy số lượng bạn muốn lấy
     const res = await fetch(`${STRAPI_API_URL}/api/movies?pagination[pageSize]=${pageSize}`, {
       headers: {
         Authorization: `Bearer ${STRAPI_API_TOKEN}`,

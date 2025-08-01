@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { usePathname } from 'next/navigation'
+import Marquee from "./Marquee";
 
 
 const Navbar = () => {
@@ -68,6 +69,7 @@ const Navbar = () => {
           height={120}
         /></Link>
       </div>
+      
       <nav className=" py-3">
         <div className="container mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           {/* Nav Menu */}
@@ -108,7 +110,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-
+<Marquee/>
 
       {/* -------------------------------BANNER----------------------------------- */}
       <div className="container relative mx-auto flex flex-col gap-4 px-4 my-4">
