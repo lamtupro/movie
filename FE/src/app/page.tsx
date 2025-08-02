@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-  title: 'Tổng hợp phim sex VLXX mới nhất | Phim Mới, Hay Nhất 2025 – quoclamtu.live',
+  title: 'Tổng hợp phim sex mới nhất | Phim Mới, Hay Nhất 2025 – quoclamtu.live',
   description: 'Trang web xem phim sex VLXX online chất lượng cao, cập nhật phim mới mỗi ngày. Không Che, Vietsub, Âu Mỹ, Hàn Quốc, Nhật Bản đầy đủ – xem nhanh, không quảng cáo tại quoclamtu.live .',
 };
 

@@ -107,10 +107,10 @@ const MovieSection = ({
                   )}
                   <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 bg-black bg-opacity-50 text-white text-sm p-2">
                     <div className="flex items-center gap-1">
-                      {formatNumber((Number(movie.views) || 0) + 200000)} <IoEye />
+                      {formatNumber(Number(movie.views) || 0)} <IoEye />
                     </div>
                     <div className="flex items-center gap-1">
-                      {formatNumber((Number(movie.likes) || 0) + 10000)} <BiLike />
+                      {formatNumber(Number(movie.likes) || 0)} <BiLike />
                     </div>
                   </div>
                 </div>

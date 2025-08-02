@@ -184,7 +184,7 @@ const Slug = () => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center text-white">
               <IoEye className='w-6 h-6 mr-1' />
-              <span>{formatNumber((Number(movie.views) || 0) + 200000)}</span>
+              <span>{formatNumber(Number(movie.views) || 0)}</span>
             </div>
 
             <button onClick={() => handleReaction('like', movie.documentId)} className="flex items-center">
@@ -194,7 +194,7 @@ const Slug = () => {
                 <BiLike className="w-6 h-6 mr-1 " />
               )}
               <span className="text-white">
-                {formatNumber((Number(movie.likes) || 0) + 10000)}
+                {formatNumber(Number(movie.likes) || 0)}
               </span>
 
             </button>
@@ -205,7 +205,7 @@ const Slug = () => {
               ) : (
                 <BiDislike className="w-6 h-6 mr-1 " />
               )}
-              <span className="text-white">{formatNumber((Number(movie.dislikes) || 0) + 500)}</span>
+              <span className="text-white">{formatNumber(Number(movie.dislikes) || 0)}</span>
             </button>
           </div>
         </div>
@@ -295,10 +295,10 @@ const Slug = () => {
 
                   <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-2 md:gap-4 bg-black bg-opacity-50 text-white text-sm p-2 truncate whitespace-nowrap overflow-hidden">
                     <div className='flex items-center gap-1'>
-                      {formatNumber((Number(relatedMovie.views) || 0) + 200000)} <IoEye />
+                      {formatNumber(Number(relatedMovie.views) || 0)} <IoEye />
                     </div>
                     <div className='flex items-center gap-1'>
-                      {formatNumber((Number(relatedMovie.likes) || 0) + 10000)} <BiLike />
+                      {formatNumber(Number(relatedMovie.likes) || 0)} <BiLike />
                     </div>
 
                   </div>

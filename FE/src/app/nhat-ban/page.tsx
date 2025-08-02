@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim sex Nhật Bản đặc sắc  | Xem phim sex Nhật Bản hay nhất hiện nay',
+  title: 'Phim sex Nhật Bản VLXX đặc sắc  | Xem phim sex Nhật Bản hay nhất hiện nay',
   description: 'Khám phá kho phim Nhật Bản đa dạng thể loại: Vụng Trộm, Hiếp Dâm, Tập Thể. Cập nhật phim sex Nhật mới nhanh nhất, chất lượng HD tại quoclamtu.live .',
 };
 

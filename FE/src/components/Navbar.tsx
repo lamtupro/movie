@@ -69,7 +69,7 @@ const Navbar = () => {
           height={120}
         /></Link>
       </div>
-      
+
       <nav className=" py-3">
         <div className="container mx-auto px-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
           {/* Nav Menu */}
@@ -110,7 +110,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-<Marquee/>
+      <Marquee />
 
       {/* -------------------------------BANNER----------------------------------- */}
       <div className="container relative mx-auto flex flex-col gap-4 px-4 my-4">
@@ -145,7 +145,6 @@ const Navbar = () => {
         })}
       </div>
       <hr className="border-gray-500 " />
-
     </div>
   )
 }
