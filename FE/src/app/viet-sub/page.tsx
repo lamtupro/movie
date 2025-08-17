@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim sex Vietsub mới nhất | Xem phim sex có phụ đề tiếng Việt miễn phí',
+  title: 'Phim sex Vietsub hay | Xem phim sex có phụ đề tiếng Việt miễn phí',
   description: 'Tổng hợp các bộ phim sex Vietsub chất lượng cao, phụ đề rõ nét, cập nhật liên tục. Xem phim online nhanh, không quảng cáo tại quoclamtu.live .',
 };
 

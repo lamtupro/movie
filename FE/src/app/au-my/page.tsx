@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Âu Mỹ
 export const metadata: Metadata = {
-  title: 'Phim sex Âu Mỹ mới nhất | Xem phim sex Châu Âu, Mỹ series chất lượng',
+  title: 'Phim sex âu mỹ vietsub | Xem phim sex Châu Âu, Mỹ series chất lượng',
   description: 'Tổng hợp các bộ phim sex Âu Mỹ với nhiều diễn viên nổi tiếng Eva Elife, Melody Mark.  Cập nhật phim mới nhanh chóng, xem miễn phí tại quoclamtu.live .',
 };
 

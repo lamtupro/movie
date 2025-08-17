@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Tổng hợp phim sex gái xinh mới nhất | Xem phim sex gái xinh tuyển chọn',
+  title: 'phim sex gái xinh vn | Xem phim sex gái xinh tuyển chọn',
   description: 'Tổng hợp các bộ phim sex gái xinh từ Nhật, Hàn, Âu Mỹ,... cập nhật liên tục hàng ngày chỉ có tại quoclamtu.live .',
 };
 

@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim sex Hàn Quốc hot | Xem phim sex gái xinh Hàn Quốc',
+  title: 'Phim sex Hàn Quốc không che | Tổng hợp phim sex gái xinh Hàn Quốc',
   description: 'Tuyển chọn phim sex Hàn Quốc hot nhất, phụ đề tiếng Việt chuẩn, cập nhật liên tục. Thưởng thức phim Hàn sex HD chất lượng cao tại quoclamtu.live .',
 };
 

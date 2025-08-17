@@ -32,13 +32,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const isMaintenanceMode = process.env.MAINTENANCE_MODE === 'true';
-  if(isMaintenanceMode){
-    return(
+  if (isMaintenanceMode) {
+    return (
       <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}>
-        <MaintenancePage /> 
-      </body>
-    </html>
+        <Head>
+          <meta name="msvalidate.01" content="7C8B5A22401979FEBFE08582048F0469" />
+        </Head>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}>
+          <MaintenancePage />
+        </body>
+      </html>
     )
   }
   return (
@@ -46,11 +49,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col `}
       >
-      <Navbar />
-      <GoogleAnalytics />
-        <main className="flex-1">   
+        <Navbar />
+        <GoogleAnalytics />
+        <main className="flex-1">
           {children}
-            <Banner />  
+          <Banner />
         </main>
         <Footer />
       </body>

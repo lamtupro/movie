@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Kho phim sex không che nổi tiếng | Xem phim sex không che chất lượng cao',
+  title: 'Xem phim sex không che vietsub | Kho phim sex không che chất lượng cao',
   description: 'Tổng hợp các bộ phim sex không che của diễn viên xinh đẹp nổi tiếng. càng xem càng cuốn với chất lượng HD và miễn phí tại quoclamtu.live .',
 };
 

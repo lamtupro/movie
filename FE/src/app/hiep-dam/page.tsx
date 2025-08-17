@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Kho phim sex hiếp dâm mới nhất | Xem phim sex hiếp dâm chọn lọc',
+  title: 'sex hiếp dâm | Xem phim sex hiếp dâm chọn lọc',
   description: 'Tổng hợp các bộ phim sex hiếp dâm chất lượng cao, cập nhật liên tục, tất cả được dàn dựng nên không được phép học và làm theo dưới bất kì hình thức nào. Xem phim sex hiếp dâm HD miễn phí tại quoclamtu.live .',
 };
 

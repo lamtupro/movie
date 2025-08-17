@@ -35,7 +35,7 @@ export async function generateMetadata(
 
   const name = actress.name || 'Diễn viên';
   return {
-    title: `Xem phim ${name} | Phim sex 18+ của diễn viên ${name} hot nhất`,
+    title: `Phim sex ${name} không che | Phim sex 18+ của diễn viên ${name} hot nhất`,
     description: `Tuyển chọn phim hot nhất của ${name}, chất lượng cao, cập nhật liên tục.`,
     alternates: {
       canonical: `https://quoclamtu.live/dien-vien/${slug}`,
