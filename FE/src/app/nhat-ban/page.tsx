@@ -48,7 +48,7 @@ export default async function NhatBanPage({ searchParams }: { searchParams: Prom
 
   return (
     <MovieSection
-      title="List Phim Sex Nhật Bản"
+      title="Xem Phim Sex Nhật Bản"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

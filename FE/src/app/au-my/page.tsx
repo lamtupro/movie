@@ -48,7 +48,7 @@ export default async function AuMyPage({ searchParams }: { searchParams: Promise
 
   return (
     <MovieSection
-      title="List Phim Sex Âu Mỹ"
+      title="Xem Phim Sex Âu Mỹ"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

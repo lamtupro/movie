@@ -49,7 +49,7 @@ export default async function VungTromPage({ searchParams }: { searchParams: Pro
 
   return (
     <MovieSection
-      title="List Phim Vụng Trộm"
+      title="Xem Phim Sex Vụng Trộm"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

@@ -48,7 +48,7 @@ export default async function HanQuocPage({ searchParams }: { searchParams: Prom
 
   return (
     <MovieSection
-      title="List Phim Sex Hàn Quốc"
+      title="Xem Phim Sex Hàn Quốc"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

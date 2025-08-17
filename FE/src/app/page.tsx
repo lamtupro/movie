@@ -50,7 +50,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ p
 
   return (
     <MovieSection
-      title="Danh sách phim mới nhất"
+      title="Danh Sách Phim Sex Mới Nhất"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

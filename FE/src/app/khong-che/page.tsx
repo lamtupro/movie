@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Xem phim sex không che vietsub | Kho phim sex không che chất lượng cao',
+  title: 'Xem phim sex không che vietsub | Kho phim sex không che chất lượng cao - quoclamtu',
   description: 'Tổng hợp các bộ phim sex không che của diễn viên xinh đẹp nổi tiếng. càng xem càng cuốn với chất lượng HD và miễn phí tại quoclamtu.live .',
 };
 
@@ -48,7 +48,7 @@ export default async function KhongChePage({ searchParams }: { searchParams: Pro
 
   return (
     <MovieSection
-      title="List Phim Sex Không Che"
+      title="Xem Phim Sex Không Che"
       movies={movies}
       currentPage={currentPage}
       totalPages={totalPages}

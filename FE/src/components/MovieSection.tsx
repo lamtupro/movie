@@ -81,7 +81,7 @@ const MovieSection = ({
   return (
     <div className="bg-[#0F0F10] py-2">
       <div className="container mx-auto px-2 md:px-4">
-        <h2 className="md:text-2xl text-xl text-white my-4">{title}</h2>
+        <h1 className="md:text-2xl text-xl text-white my-4">{title}</h1>
 
         {/* List phim */}
         <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-y-4 md:gap-y-8 gap-x-4">
@@ -114,9 +114,9 @@ const MovieSection = ({
                     </div>
                   </div>
                 </div>
-                <h1 className="text-white text-sm p-2 truncate">
+                <h2 className="text-white text-sm p-2 truncate">
                   {movie.name}
-                </h1>
+                </h2>
               </Link>
             );
           })}
