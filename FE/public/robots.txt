@@ -1,7 +1,13 @@
 # *
 User-agent: *
 Allow: /
- 
+
+# black-listed-bot
+User-agent: black-listed-bot
+Disallow: /bao-tri
+
+# Host
+Host: https://quoclamtu.live
 
 # Sitemaps
 Sitemap: https://quoclamtu.live/sitemap.xml

@@ -124,7 +124,7 @@ const Navbar = () => {
                     if (typeof window !== "undefined" && window.gtag) {
                       window.gtag('event', 'click_QC_tren', {
                         banner_id: banner.documentId,
-                        ten_NC: banner.name || 'Unnamed Banner',
+                        ten_doi_tac: banner.name || 'Unnamed Banner',
                         banner_link: banner.link,
                         value: 1,
                       });
