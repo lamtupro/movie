@@ -4,9 +4,10 @@ import { event as gaEvent } from '@/src/lib/gtag';
 
 interface VideoPlayerProps {
     url: string;
+    title: string
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, title }) => {
     const [isStarted, setIsStarted] = useState(false);
     const [showMainVideo, setShowMainVideo] = useState(false);
     const [canSkip, setCanSkip] = useState(false);
@@ -154,7 +155,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
                 <iframe
                     src={url}
                     className=" inset-0 w-full h-full border-none object-cover"
-                   
+                   title={title}
                     allowFullScreen
                 ></iframe>
             </div>

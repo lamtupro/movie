@@ -65,26 +65,26 @@ const Slug = () => {
     }
   }
   useEffect(() => {
-  const fetchData = async () => {
-    await fetchMovie();
+    const fetchData = async () => {
+      await fetchMovie();
 
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/banners?filters[banner_below_video][$eq]=true&populate=*`);
-      const data = await res.json();
+      try {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/banners?filters[banner_below_video][$eq]=true&populate=*`);
+        const data = await res.json();
 
-      if (Array.isArray(data?.data)) {
-        setBanners(data.data);
-      } else {
+        if (Array.isArray(data?.data)) {
+          setBanners(data.data);
+        } else {
+          setBanners([]);
+        }
+      } catch (err) {
+        console.error('Lỗi fetch banner:', err);
         setBanners([]);
       }
-    } catch (err) {
-      console.error('Lỗi fetch banner:', err);
-      setBanners([]);
-    }
-  };
+    };
 
-  fetchData();
-}, [slug]);
+    fetchData();
+  }, [slug]);
 
   const handleLinkChange = (id: number, link: string) => {
     setActiveLinks(prev => ({ ...prev, [id]: link }))
@@ -158,28 +158,38 @@ const Slug = () => {
           <VideoPlayer
             key={activeLinks[movie.documentId] || movie.link_1 || movie.link_2}
             url={activeLinks[movie.documentId] || movie.link_1 || movie.link_2}
+            title={movie.name}
           />
         ) : (
           <p>Không có video</p>
         )}
 
         <div className='flex flex-wrap gap-4 justify-between'>
-          <div className="flex items-center space-x-2  mt-4">
-            <button
-              className={`p-2 rounded  ${activeLinks[movie.documentId] === movie.link_1 ? 'bg-gray-700' : 'bg-gray-700'} text-white`}
-              onClick={() => handleLinkChange(movie.documentId, movie.link_1)}
-            >
-              #1
-            </button>
+          <div className="flex items-center space-x-2 mt-4">
+            {movie.link_1 && (
+              <button
+                className={`p-2 rounded ${(activeLinks[movie.documentId] || movie.link_1) === movie.link_1
+                  ? 'bg-blue-500'
+                  : 'bg-gray-700'
+                  } text-white`}
+                onClick={() => handleLinkChange(movie.documentId, movie.link_1)}
+              >
+                #1
+              </button>
+            )}
             {movie.link_2 && (
               <button
-                className={`p-2 rounded ${activeLinks[movie.documentId] === movie.link_2 ? 'bg-blue-500' : 'bg-gray-700'} text-white`}
+                className={`p-2 rounded ${activeLinks[movie.documentId] === movie.link_2
+                  ? 'bg-blue-500'
+                  : 'bg-gray-700'
+                  } text-white`}
                 onClick={() => handleLinkChange(movie.documentId, movie.link_2)}
               >
                 #2
               </button>
             )}
           </div>
+
 
           <div className="flex items-center space-x-4">
             <div className="flex items-center text-white">
@@ -232,7 +242,7 @@ const Slug = () => {
               </div>
             );
           })}
-        </div> 
+        </div>
         {movie.code && (
           <div className="my-4">
             <h2 className="text-lg font-semibold text-[#FEA016]">Code:</h2>
@@ -269,7 +279,7 @@ const Slug = () => {
           </div>
         )}
 
-      </main>
+      </main >
       <div className="my-16 container w-full md:mx-auto px-2">
         <h2 className="text-white text-base md:text-xl mb-4">Các Phim Với Nội Dung Tương Tự:</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
