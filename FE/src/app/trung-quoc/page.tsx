@@ -3,8 +3,9 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim sex Trung Quốc mới nhất | Xem phim sex Trung bộ hấp dẫn miễn phí',
+  title: 'sex Trung Quốc vietsub | Xem phim sex Trung hấp dẫn miễn phí',
   description: 'Cập nhật các bộ phim sex Trung Quốc đặc sắc, nhiều thể loại. Xem phim sex Trung Quốc phụ đề tiếng Việt, chất lượng HD tại  quoclamtu.live .',
+  keywords: ["sex Trung Quốc", "phim sex trung quốc vietsub", "clip sex trung quốc", "sex trung quốc gái xinh"],
 };
 
 const pageSize = 20; // Số phim mỗi trang
@@ -17,7 +18,7 @@ const getMovies = async (page: number) => {
         headers: {
           Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,  // Thêm dòng này
         },
-       next: { revalidate: 3600 }
+        next: { revalidate: 3600 }
       }
     );
 

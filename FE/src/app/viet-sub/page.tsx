@@ -5,6 +5,21 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Phim sex Vietsub hay | Xem phim sex có phụ đề tiếng Việt miễn phí',
   description: 'Tổng hợp các bộ phim sex Vietsub chất lượng cao, phụ đề rõ nét, cập nhật liên tục. Xem phim online nhanh, không quảng cáo tại quoclamtu.live .',
+  openGraph: {
+    title: "xem phim sex vietsub hay nhất 2025",
+    description: "Kho phim sex mới nhất, xem miễn phí online.",
+    url: "https://quoclamtu.live/viet-sub?page=1",
+    images: [
+      {
+        url: "https://ab.quoclamtu.live/uploads/Co_giao_day_boi_nong_bong_va_cau_hoc_tro_may_man_Yua_Mikami_2565540ff2.webp",
+        alt: "Phim sex vietsub hay nhất 2025",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: "website",
+  },
+  keywords: ["xem phim sex vietsub", "sex vietsub không che", "phim sex vietsub sextop1", "phim sex vietsub vlxx hay"],
 };
 
 const pageSize = 20; // Số phim mỗi trang

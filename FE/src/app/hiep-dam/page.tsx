@@ -3,8 +3,9 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'sex hiếp dâm | Xem phim sex hiếp dâm chọn lọc',
+  title: 'Sex hiếp dâm | Xem phim sex hiếp dâm chọn lọc',
   description: 'Tổng hợp các bộ phim sex hiếp dâm chất lượng cao, cập nhật liên tục, tất cả được dàn dựng nên không được phép học và làm theo dưới bất kì hình thức nào. Xem phim sex hiếp dâm HD miễn phí tại quoclamtu.live .',
+keywords: ["sex hiếp dâm", "sex hiếp dâm tập thể", "clip hiếp dâm việt nam", "sex hiếp dâm gái xinh"],
 };
 
 const pageSize = 20; // Số phim mỗi trang

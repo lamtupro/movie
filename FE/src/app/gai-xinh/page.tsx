@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'phim sex gái xinh vn | Xem phim sex gái xinh tuyển chọn',
   description: 'Tổng hợp các bộ phim sex gái xinh từ Nhật, Hàn, Âu Mỹ,... cập nhật liên tục hàng ngày chỉ có tại quoclamtu.live .',
+keywords: ["sex gai xinh", "sex gái xinh việt nam", "gái xinh lộ clip", "sex hot girl"],
 };
 
 const pageSize = 20; // Số phim mỗi trang

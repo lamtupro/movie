@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Top 100 phim sex hay nhất | Xem phim hot miễn phí chất lượng cao',
   description: 'Tổng hợp 100 bộ phim sex hay nhất được xem nhiều nhất, cập nhật liên tục. Xem phim sex HD miễn phí nhanh, mượt tại quoclamtu.live .',
+ keywords: ["Top phim sex hay 2025", "xem phim hay buomxinh", "phim sex hay vietnam", "Tổng hợp sex hay nhất"],
 };
 
 const pageSize = 20; // Số phim mỗi trang

@@ -3,8 +3,9 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'List phim sex tập thể mới nhất | Xem phim sex tập thể tại quoclamtu',
+  title: 'Phim sex tập thể mới nhất | Xem phim sex tập thể tại quoclamtu',
   description: 'Tổng hợp các bộ phim sex tập thể chất lượng cao, cập nhật liên tục, lưu ý các video chỉ là hư cấu và được dàn đựng, không được học và làm theo dưới bất kì hình thức nào. Xem phim sex tập thể HD miễn phí tại quoclamtu.live .',
+  keywords: ["Phim sex tập thể 2025", "địt nhau tập thể", "vlxx địt tập thể", "sex đụ nhau tập thể"],
 };
 
 const pageSize = 20; // Số phim mỗi trang
@@ -17,7 +18,7 @@ const getMovies = async (page: number) => {
         headers: {
           Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
         },
-       next: { revalidate: 3600 }
+        next: { revalidate: 3600 }
       }
     );
 

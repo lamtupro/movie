@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Phim sex Hàn Quốc không che | Tổng hợp phim sex gái xinh Hàn Quốc',
   description: 'Tuyển chọn phim sex Hàn Quốc hot nhất, phụ đề tiếng Việt chuẩn, cập nhật liên tục. Thưởng thức phim Hàn sex HD chất lượng cao tại quoclamtu.live .',
+keywords: ["sex hàn quốc", "phim sex idol kpop", "sex diễn viên hàn quốc", "sex gái xinh hàn quốc không che"],
 };
 
 const pageSize = 20; // Số phim mỗi trang

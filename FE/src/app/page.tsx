@@ -3,9 +3,24 @@ import { Metadata } from 'next'
 
 
 export const metadata: Metadata = {
-  title: 'Tổng hợp phim sex mới nhất | Phim Mới, Hay Nhất 2025 – quoclamtu.live',
+  title: 'Tổng hợp phim sex 2025 mới nhất | Xem VLXX, Hay Nhất 2025 – quoclamtu.live',
   description: 'Trang web xem phim sex VLXX online chất lượng cao, cập nhật phim mới mỗi ngày. Không Che, Vietsub, Âu Mỹ, Hàn Quốc, Nhật Bản đầy đủ – xem nhanh, không quảng cáo tại quoclamtu.live .',
-};
+  openGraph: {
+    title: "xem phim sex chất lượng nhất 2025",
+    description: "Kho phim sex mới nhất, xem miễn phí online.",
+    url: "https://quoclamtu.live",
+    images: [
+      {
+        url: "https://ab.quoclamtu.live/uploads/Hom_nay_hay_quen_vo_anh_di_Kana_Momonogi_bf00fbc714.jpg",
+        alt: "Phim sex hay nhất 2025",
+        width: 1200,
+        height: 630,
+      },
+    ],
+    type: "website",
+  },
+  keywords: ["phim sex hay", "phim sex không che 2025", "phim sex VLXX mới nhất","sex Việt Nam","xem sex buomxinh"],
+}
 
 const pageSize = 20;
 
@@ -17,7 +32,7 @@ const getMovies = async (page: number) => {
         headers: {
           Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,  // Thêm dòng này
         },
-       /*  next: { revalidate: 3600 } */
+        /*  next: { revalidate: 3600 } */
       }
     );
 

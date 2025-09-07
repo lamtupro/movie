@@ -3,8 +3,9 @@ import { Metadata } from 'next'
 
 // Cấu hình SEO cho trang Vietsub
 export const metadata: Metadata = {
-  title: 'Phim sex Nhật Bản VLXX đặc sắc | Xem phim sex Nhật Bản hay nhất hiện nay',
+  title: 'Phim sex Nhật Bản loạn luân đặc sắc | Xem phim sex Nhật Bản hay nhất hiện nay',
   description: 'Khám phá kho phim Nhật Bản đa dạng thể loại: Vụng Trộm, Hiếp Dâm, Tập Thể. Cập nhật phim sex Nhật mới nhanh nhất, chất lượng HD',
+  keywords: ["xem phim sex Nhật loạn luân", "xem phim sex vlxx", "phim sex nhật bản hay nhất", "phim sex không che missav hay"],
 };
 
 const pageSize = 20; // Số phim mỗi trang
@@ -13,10 +14,12 @@ const getMovies = async (page: number) => {
   try {
     const res = await fetch(
       `${process.env.STRAPI_API_URL}/api/movies?populate=*&filters[nhat_ban][$eq]=true&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
-      { headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-      },
-      next: { revalidate: 3600 } }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+        },
+        next: { revalidate: 3600 }
+      }
     );
 
     if (!res.ok) throw new Error('Fetch failed');
