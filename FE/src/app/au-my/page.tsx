@@ -1,12 +1,22 @@
 import MovieSection from '@/src/components/MovieSection'
-import { Metadata } from 'next'
+import { generateSeoMetadata } from '@/src/lib/seo';
 
-// Cấu hình SEO cho trang Âu Mỹ
-export const metadata: Metadata = {
-  title: 'Phim sex âu mỹ vietsub | Xem phim sex Châu Âu, Mỹ series chất lượng',
-  description: 'Tổng hợp các bộ phim sex Âu Mỹ với nhiều diễn viên nổi tiếng Eva Elife, Melody Mark.  Cập nhật phim mới nhanh chóng, xem miễn phí tại quoclamtu.live .',
-keywords: ["sex âu mỹ", "phim sex âu mỹ vietsub", "sex Melody Mark", "sex gái tây không che"],
-};
+export async function generateMetadata({ searchParams }: { searchParams: { page?: string } }) {
+  const resolvedParams = await searchParams;
+  const page = parseInt(resolvedParams.page || "1", 10);
+  const canonical =
+    page > 1
+      ? `https://quoclamtu.live/au-my?page=${page}`
+      : `https://quoclamtu.live/au-my`;
+
+  return generateSeoMetadata({
+    title: "Phim sex âu mỹ vietsub | Xem phim sex Châu Âu, Mỹ series chất lượng",
+    description: 'Tổng hợp các bộ phim sex Âu Mỹ với nhiều diễn viên nổi tiếng Eva Elife, Melody Mark.  Cập nhật phim mới nhanh chóng, xem miễn phí tại quoclamtu.live .',
+    keywords: ["sex âu mỹ", "phim sex âu mỹ vietsub", "sex Melody Mark", "sex gái tây không che"],
+    canonical,
+    page,
+  });
+}
 
 const pageSize = 20; // Số phim mỗi trang
 
@@ -14,10 +24,12 @@ const getMovies = async (page: number) => {
   try {
     const res = await fetch(
       `${process.env.STRAPI_API_URL}/api/movies?populate=*&filters[us][$eq]=true&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
-      { headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-      },
-      next: { revalidate: 3600 } }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+        },
+        next: { revalidate: 3600 }
+      }
     );
 
     if (!res.ok) throw new Error('Fetch failed');

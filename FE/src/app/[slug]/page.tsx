@@ -290,7 +290,7 @@ const Slug = () => {
 
               <Link href={`/${relatedMovie.slug}`} key={relatedMovie.documentId}>
                 <div className="relative group overflow-hidden rounded-lg text-sm">
-                  <img
+                  <Image
                     src={srcImg}
                     alt={relatedMovie.title}
                     width={300}

@@ -1,23 +1,34 @@
 import MovieSection from '@/src/components/MovieSection'
-import { Metadata } from 'next'
+import { generateSeoMetadata } from '@/src/lib/seo';
 
-// Cấu hình SEO cho trang Vietsub
-export const metadata: Metadata = {
-  title: 'phim sex gái xinh vn | Xem phim sex gái xinh tuyển chọn',
-  description: 'Tổng hợp các bộ phim sex gái xinh từ Nhật, Hàn, Âu Mỹ,... cập nhật liên tục hàng ngày chỉ có tại quoclamtu.live .',
-keywords: ["sex gai xinh", "sex gái xinh việt nam", "gái xinh lộ clip", "sex hot girl"],
-};
+export async function generateMetadata({ searchParams }: { searchParams: { page?: string } }) {
+  const resolvedParams = await searchParams;
+  const page = parseInt(resolvedParams.page || "1", 10);
+  const canonical =
+    page > 1
+      ? `https://quoclamtu.live/gai-xinh?page=${page}`
+      : `https://quoclamtu.live/gai-xinh`;
 
+  return generateSeoMetadata({
+    title: 'phim sex gái xinh vn | Xem phim sex gái xinh tuyển chọn',
+    description: 'Tổng hợp các bộ phim sex gái xinh từ Nhật, Hàn, Âu Mỹ,... cập nhật liên tục hàng ngày chỉ có tại quoclamtu.live .',
+    keywords: ["sex gai xinh", "sex gái xinh việt nam", "gái xinh lộ clip", "sex hot girl"],
+    canonical,
+    page,
+  });
+}
 const pageSize = 20; // Số phim mỗi trang
 
 const getMovies = async (page: number) => {
   try {
     const res = await fetch(
       `${process.env.STRAPI_API_URL}/api/movies?populate=*&filters[gai_xinh][$eq]=true&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
-      { headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-      },
-      next: { revalidate: 3600 } }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+        },
+        next: { revalidate: 3600 }
+      }
     );
 
     if (!res.ok) throw new Error('Fetch failed');

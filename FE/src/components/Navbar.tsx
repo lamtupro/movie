@@ -67,6 +67,7 @@ const Navbar = () => {
           alt="logo"
           width={220}
           height={120}
+          priority
         /></Link>
       </div>
 
@@ -135,6 +136,8 @@ const Navbar = () => {
                       alt={banner.name}
                       layout="fill"
                       className="rounded-lg"
+                      priority
+                      fetchPriority="high"
                       unoptimized
                     />
                   </a>

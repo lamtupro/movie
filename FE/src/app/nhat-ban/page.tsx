@@ -1,12 +1,22 @@
 import MovieSection from '@/src/components/MovieSection'
-import { Metadata } from 'next'
+import { generateSeoMetadata } from '@/src/lib/seo';
 
-// Cấu hình SEO cho trang Vietsub
-export const metadata: Metadata = {
-  title: 'Phim sex Nhật Bản loạn luân đặc sắc | Xem phim sex Nhật Bản hay nhất hiện nay',
-  description: 'Khám phá kho phim Nhật Bản đa dạng thể loại: Vụng Trộm, Hiếp Dâm, Tập Thể. Cập nhật phim sex Nhật mới nhanh nhất, chất lượng HD',
-  keywords: ["xem phim sex Nhật loạn luân", "xem phim sex vlxx", "phim sex nhật bản hay nhất", "phim sex không che missav hay"],
-};
+export async function generateMetadata({ searchParams }: { searchParams: { page?: string } }) {
+  const resolvedParams = await searchParams;
+  const page = parseInt(resolvedParams.page || "1", 10);
+  const canonical =
+    page > 1
+      ? `https://quoclamtu.live/nhat-ban?page=${page}`
+      : `https://quoclamtu.live/nhat-ban`;
+
+  return generateSeoMetadata({
+    title: 'Phim sex Nhật Bản loạn luân đặc sắc | Xem phim sex Nhật Bản hay nhất hiện nay',
+    description: 'Khám phá kho phim Nhật Bản đa dạng thể loại: Vụng Trộm, Hiếp Dâm, Tập Thể. Cập nhật phim sex Nhật mới nhanh nhất, chất lượng HD',
+    keywords: ["xem phim sex Nhật loạn luân", "xem phim sex vlxx", "phim sex nhật bản hay nhất", "phim sex không che missav hay"],
+    canonical,
+    page,
+  });
+}
 
 const pageSize = 20; // Số phim mỗi trang
 

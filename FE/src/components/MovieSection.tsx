@@ -1,4 +1,4 @@
-'use client';
+/* 'use client'; ảnh hưởng client side */ 
 
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 import { IoEye } from 'react-icons/io5';
@@ -91,7 +91,7 @@ const MovieSection = ({
             return (
               <Link href={`/${movie.slug}`} key={movie.id} title={movie.name}>
                 <div className="relative group overflow-hidden rounded-lg text-sm">
-                  <img
+                  <Image
                     src={srcImg}
                     alt={movie.name}
                     width={300}

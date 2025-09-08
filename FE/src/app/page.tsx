@@ -1,26 +1,24 @@
 import MovieSection from '@/src/components/MovieSection'
-import { Metadata } from 'next'
+import { generateSeoMetadata } from '@/src/lib/seo';
 
+export async function generateMetadata({ searchParams }: { searchParams: { page?: string } }) {
+  const resolvedParams = await searchParams;
+  const page = parseInt(resolvedParams.page || "1", 10);
+  const canonical =
+    page > 1
+      ? `https://quoclamtu.live?page=${page}`
+      : `https://quoclamtu.live`;
 
-export const metadata: Metadata = {
-  title: 'Tổng hợp phim sex 2025 mới nhất | Xem VLXX, Hay Nhất 2025 – quoclamtu.live',
-  description: 'Trang web xem phim sex VLXX online chất lượng cao, cập nhật phim mới mỗi ngày. Không Che, Vietsub, Âu Mỹ, Hàn Quốc, Nhật Bản đầy đủ – xem nhanh, không quảng cáo tại quoclamtu.live .',
-  openGraph: {
-    title: "xem phim sex chất lượng nhất 2025",
-    description: "Kho phim sex mới nhất, xem miễn phí online.",
-    url: "https://quoclamtu.live",
-    images: [
-      {
-        url: "https://ab.quoclamtu.live/uploads/Hom_nay_hay_quen_vo_anh_di_Kana_Momonogi_bf00fbc714.jpg",
-        alt: "Phim sex hay nhất 2025",
-        width: 1200,
-        height: 630,
-      },
-    ],
-    type: "website",
-  },
-  keywords: ["phim sex hay", "phim sex không che 2025", "phim sex VLXX mới nhất","sex Việt Nam","xem sex buomxinh"],
+  return generateSeoMetadata({
+    title: 'Tổng hợp phim sex 2025 mới nhất | Xem VLXX, Hay Nhất 2025 – quoclamtu.live',
+    description: 'Trang web xem phim sex VLXX siêu nét, cập nhật phim mới mỗi ngày. Không Che, Vietsub,... đầy đủ không quảng cáo tại quoclamtu.live .',
+    keywords: ["phim sex hay", "phim sex không che 2025", "phim sex VLXX mới nhất", "sex Việt Nam", "xem sex buomxinh"],
+    canonical,
+    page,
+    ogImage: "https://ab.quoclamtu.live/uploads/Hom_nay_hay_quen_vo_anh_di_Kana_Momonogi_bf00fbc714.jpg",
+  });
 }
+
 
 const pageSize = 20;
 

@@ -5,21 +5,12 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "images.pexels.com",
-      },
-      {
-        protocol: "https",
-        hostname: "encrypted-tbn0.gstatic.com",
-      },
-      {
-        protocol: "https",
-        hostname: "media.istockphoto.com",
+        hostname: "ab.quoclamtu.live",
       },
 
-    ], 
+    ],
     domains: [
-      'authentic-star-bb10cc4ffe.media.strapiapp.com', // Thêm domain Strapi của bạn vào đây
-      'quanly.quoclamtu.live', // Các domain khác nếu có , KHAI BÁO ĐỂ KO BỊ CHẶN
+       'ab.quoclamtu.live', // Các domain khác nếu có , KHAI BÁO ĐỂ KO BỊ CHẶN
     ],
   },
 };

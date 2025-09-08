@@ -1,12 +1,22 @@
 import MovieSection from '@/src/components/MovieSection'
-import { Metadata } from 'next'
+import { generateSeoMetadata } from '@/src/lib/seo';
 
-// Cấu hình SEO cho trang Vietsub
-export const metadata: Metadata = {
-  title: 'Phim sex vụng trộm mới nhất | Xem phim sex vụng trộm miễn phí',
-  description: 'Tổng hợp các bộ phim sex vụng trộm chất lượng cao, cập nhật liên tục. Xem phim sex vụng trộm HD miễn phí tại quoclamtu.live .',
-  keywords: ["xem phim sex vụng trộm", "sex vụng trộm 2025", "phim sex vụng trộm VLXX","phim sex vụng trộm nangcuctv"],
-};
+export async function generateMetadata({ searchParams }: { searchParams: { page?: string } }) {
+  const resolvedParams = await searchParams;
+  const page = parseInt(resolvedParams.page || "1", 10);
+  const canonical =
+    page > 1
+      ? `https://quoclamtu.live/vung-trom?page=${page}`
+      : `https://quoclamtu.live/vung-trom`;
+
+  return generateSeoMetadata({
+    title: 'Phim sex vụng trộm mới nhất | Xem phim sex vụng trộm miễn phí',
+    description: 'Tổng hợp các bộ phim sex vụng trộm chất lượng cao, cập nhật liên tục. Xem phim sex vụng trộm HD miễn phí tại quoclamtu.live .',
+    keywords: ["xem phim sex vụng trộm", "sex vụng trộm 2025", "phim sex vụng trộm VLXX", "phim sex vụng trộm nangcuctv"],
+    canonical,
+    page,
+  });
+}
 
 const pageSize = 20; // Số phim mỗi trang
 
@@ -14,10 +24,11 @@ const getMovies = async (page: number) => {
   try {
     const res = await fetch(
       `${process.env.STRAPI_API_URL}/api/movies?populate=*&filters[vung_trom][$eq]=true&sort=createdAt:desc&pagination[page]=${page}&pagination[pageSize]=${pageSize}`,
-      { headers: {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-      },
-       next: { revalidate: 3600 }
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+        },
+        next: { revalidate: 3600 }
       }
     );
 

@@ -10,7 +10,7 @@ declare global {
 
 const Banner = () => {
   const [banners, setBanners] = useState<any[]>([]);
-  const [hiddenBanners, setHiddenBanners] = useState<{ [key: string]: boolean }>({}); 
+  const [hiddenBanners, setHiddenBanners] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/banners?populate=*&filters[banner_bot][$eq]=true`)
@@ -68,6 +68,8 @@ const Banner = () => {
                 src={imageUrl || ''}
                 alt={banner.name}
                 layout="fill"
+                priority
+                fetchPriority="high"
                 className="rounded-lg"
                 unoptimized
               />

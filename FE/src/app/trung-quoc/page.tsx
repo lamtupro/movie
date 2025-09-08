@@ -1,12 +1,22 @@
 import MovieSection from '@/src/components/MovieSection'
-import { Metadata } from 'next'
+import { generateSeoMetadata } from '@/src/lib/seo';
 
-// Cấu hình SEO cho trang Vietsub
-export const metadata: Metadata = {
-  title: 'sex Trung Quốc vietsub | Xem phim sex Trung hấp dẫn miễn phí',
-  description: 'Cập nhật các bộ phim sex Trung Quốc đặc sắc, nhiều thể loại. Xem phim sex Trung Quốc phụ đề tiếng Việt, chất lượng HD tại  quoclamtu.live .',
-  keywords: ["sex Trung Quốc", "phim sex trung quốc vietsub", "clip sex trung quốc", "sex trung quốc gái xinh"],
-};
+export async function generateMetadata({ searchParams }: { searchParams: { page?: string } }) {
+  const resolvedParams = await searchParams;
+  const page = parseInt(resolvedParams.page || "1", 10);
+  const canonical =
+    page > 1
+      ? `https://quoclamtu.live/trung-quoc?page=${page}`
+      : `https://quoclamtu.live/trung-quoc`;
+
+  return generateSeoMetadata({
+    title: 'sex Trung Quốc vietsub | Xem phim sex Trung hấp dẫn miễn phí',
+    description: 'Cập nhật các bộ phim sex Trung Quốc đặc sắc, nhiều thể loại. Xem phim sex Trung Quốc phụ đề tiếng Việt, chất lượng HD tại  quoclamtu.live .',
+    keywords: ["sex Trung Quốc", "phim sex trung quốc vietsub", "clip sex trung quốc", "sex trung quốc gái xinh"],
+    canonical,
+    page,
+  });
+}
 
 const pageSize = 20; // Số phim mỗi trang
 

@@ -1,26 +1,23 @@
 import MovieSection from '@/src/components/MovieSection'
-import { Metadata } from 'next'
+import { generateSeoMetadata } from '@/src/lib/seo';
 
-// Cấu hình SEO cho trang Vietsub
-export const metadata: Metadata = {
-  title: 'Xem phim sex không che vietsub | Kho phim sex không che chất lượng cao - quoclamtu',
-  description: 'Tổng hợp các bộ phim sex không che của diễn viên xinh đẹp nổi tiếng. càng xem càng cuốn với chất lượng HD và miễn phí tại quoclamtu.live .',
-  openGraph: {
-    title: "xem phim sex không che gái xinh 2025",
-    description: "Kho phim sex không che mới nhất, xem miễn phí online.",
-    url: "https://quoclamtu.live/khong-che?page=1",
-    images: [
-      {
-        url: "https://ab.quoclamtu.live/uploads/Hau_cung_cua_Karen_Kaede_va_Arata_Arina_Cap_doi_manh_nhat_du_suc_vat_kiet_moi_thanh_nien_664e199481.jpg",
-        alt: "Phim sex vietsub hay nhất 2025",
-        width: 1200,
-        height: 630,
-      },
-    ],
-    type: "website",
-  },
-  keywords: ["xem phim sex không che gái xinh", "xem phim sex không che", "phim sex không che vlxx", "phim sex không che missav hay"],
-};
+export async function generateMetadata({ searchParams }: { searchParams: { page?: string } }) {
+  const resolvedParams = await searchParams;
+  const page = parseInt(resolvedParams.page || "1", 10);
+  const canonical =
+    page > 1
+      ? `https://quoclamtu.live/khong-che?page=${page}`
+      : `https://quoclamtu.live/khong-che`;
+
+  return generateSeoMetadata({
+    title: 'Xem phim sex không che vietsub | Kho phim sex không che chất lượng cao - quoclamtu',
+    description: 'Tổng hợp các bộ phim sex không che của diễn viên xinh đẹp nổi tiếng. càng xem càng cuốn với chất lượng HD và miễn phí tại quoclamtu.live .',
+    keywords: ["xem phim sex không che gái xinh", "xem phim sex không che", "phim sex không che vlxx", "phim sex không che missav hay"],
+    canonical,
+    page,
+    ogImage: "https://ab.quoclamtu.live/uploads/Hau_cung_cua_Karen_Kaede_va_Arata_Arina_Cap_doi_manh_nhat_du_suc_vat_kiet_moi_thanh_nien_664e199481.jpg",
+  });
+}
 
 const pageSize = 20; // Số phim mỗi trang
 

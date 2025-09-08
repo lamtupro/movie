@@ -1,13 +1,22 @@
 import MovieSection from '@/src/components/MovieSection'
-import { Metadata } from 'next'
+import { generateSeoMetadata } from '@/src/lib/seo';
 
-// Cấu hình SEO cho trang Vietsub
-export const metadata: Metadata = {
-  title: 'Phim sex tập thể mới nhất | Xem phim sex tập thể tại quoclamtu',
-  description: 'Tổng hợp các bộ phim sex tập thể chất lượng cao, cập nhật liên tục, lưu ý các video chỉ là hư cấu và được dàn đựng, không được học và làm theo dưới bất kì hình thức nào. Xem phim sex tập thể HD miễn phí tại quoclamtu.live .',
-  keywords: ["Phim sex tập thể 2025", "địt nhau tập thể", "vlxx địt tập thể", "sex đụ nhau tập thể"],
-};
+export async function generateMetadata({ searchParams }: { searchParams: { page?: string } }) {
+  const resolvedParams = await searchParams;
+  const page = parseInt(resolvedParams.page || "1", 10);
+  const canonical =
+    page > 1
+      ? `https://quoclamtu.live/tap-the?page=${page}`
+      : `https://quoclamtu.live/tap-the`;
 
+  return generateSeoMetadata({
+    title: 'Phim sex tập thể 2025 | Xem địt nhau tập thể tại quoclamtu',
+    description: 'Xem sex đụ nhau tập thể cực phê, some gái xinh bắn nước HD miễn phí tại quoclamtu.live .',
+    keywords: ["Phim sex tập thể 2025", "địt nhau tập thể", "vlxx địt tập thể", "sex đụ nhau tập thể"],
+    canonical,
+    page,
+  });
+}
 const pageSize = 20; // Số phim mỗi trang
 
 const getMovies = async (page: number) => {
