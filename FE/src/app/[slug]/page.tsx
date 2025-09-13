@@ -144,7 +144,7 @@ const Slug = () => {
     <>
       <Head>
         <link rel="canonical" href={`https://quoclamtu.live/${slug}`} />
-        <title>{movie.name} | Xem phim chất lượng cao</title>
+        <title>{movie.name}</title>
         <meta name="description" content={movie.description || "Xem phim sex VLXX chất lượng, tốc độ cao, không quảng cáo"} />
         <meta property="og:title" content={movie.name} />
         <meta property="og:description" content={movie.description || "Phim hấp dẫn, nội dung lôi cuốn"} />
@@ -164,63 +164,67 @@ const Slug = () => {
           <p>Không có video</p>
         )}
 
-        <div className='flex flex-wrap gap-4 justify-between'>
-          <div className="flex items-center space-x-2 mt-4">
-            {movie.link_1 && (
-              <button
-                className={`p-2 rounded ${(activeLinks[movie.documentId] || movie.link_1) === movie.link_1
-                  ? 'bg-blue-500'
-                  : 'bg-gray-700'
-                  } text-white`}
-                onClick={() => handleLinkChange(movie.documentId, movie.link_1)}
-              >
-                #1
-              </button>
-            )}
-            {movie.link_2 && (
-              <button
-                className={`p-2 rounded ${activeLinks[movie.documentId] === movie.link_2
-                  ? 'bg-blue-500'
-                  : 'bg-gray-700'
-                  } text-white`}
-                onClick={() => handleLinkChange(movie.documentId, movie.link_2)}
-              >
-                #2
-              </button>
-            )}
-          </div>
+        <div className="flex items-center justify-between gap-4 mt-4 flex-wrap md:flex-nowrap">
+  {/* Nút link #1, #2 */}
+  <div className="flex items-center space-x-2">
+    {movie.link_1 && (
+      <button
+        className={`px-3 py-1 rounded-lg flex items-center justify-center font-medium h-full transition
+          ${(activeLinks[movie.documentId] || movie.link_1) === movie.link_1
+            ? 'bg-blue-500 text-white'
+            : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+          }`}
+        onClick={() => handleLinkChange(movie.documentId, movie.link_1)}
+      >
+        #1
+      </button>
+    )}
+    {movie.link_2 && (
+      <button
+        className={`px-3 py-1 rounded-lg flex items-center justify-center font-medium h-full transition
+          ${activeLinks[movie.documentId] === movie.link_2
+            ? 'bg-blue-500 text-white'
+            : 'bg-gray-700 text-gray-200 hover:bg-gray-600'
+          }`}
+        onClick={() => handleLinkChange(movie.documentId, movie.link_2)}
+      >
+        #2
+      </button>
+    )}
+  </div>
+
+  {/* Views & Reactions */}
+  <div className="flex items-center space-x-4">
+    {/* Views */}
+    <div className="flex items-center text-white space-x-1">
+      <IoEye className="w-5 h-5" />
+      <span>{formatNumber(Number(movie.views) || 0)}</span>
+    </div>
+
+    {/* Like */}
+    <button onClick={() => handleReaction('like', movie.documentId)} className="flex items-center space-x-1 text-white hover:text-green-400 transition">
+      {reactionStatus[movie.documentId] === 'like' ? (
+        <BiSolidLike className="w-5 h-5" />
+      ) : (
+        <BiLike className="w-5 h-5" />
+      )}
+      <span>{formatNumber(Number(movie.likes) || 0)}</span>
+    </button>
+
+    {/* Dislike */}
+    <button onClick={() => handleReaction('dislike', movie.documentId)} className="flex items-center space-x-1 text-white hover:text-red-400 transition">
+      {reactionStatus[movie.documentId] === 'dislike' ? (
+        <BiSolidDislike className="w-5 h-5" />
+      ) : (
+        <BiDislike className="w-5 h-5" />
+      )}
+      <span>{formatNumber(Number(movie.dislikes) || 0)}</span>
+    </button>
+  </div>
+</div>
 
 
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center text-white">
-              <IoEye className='w-6 h-6 mr-1' />
-              <span>{formatNumber(Number(movie.views) || 0)}</span>
-            </div>
-
-            <button onClick={() => handleReaction('like', movie.documentId)} className="flex items-center">
-              {reactionStatus[movie.documentId] === 'like' ? (
-                <BiSolidLike className="w-6 h-6 mr-1 text-white" />
-              ) : (
-                <BiLike className="w-6 h-6 mr-1 " />
-              )}
-              <span className="text-white">
-                {formatNumber(Number(movie.likes) || 0)}
-              </span>
-
-            </button>
-
-            <button onClick={() => handleReaction('dislike', movie.documentId)} className="flex items-center">
-              {reactionStatus[movie.documentId] === 'dislike' ? (
-                <BiSolidDislike className="w-6 h-6 mr-1 text-white" />
-              ) : (
-                <BiDislike className="w-6 h-6 mr-1 " />
-              )}
-              <span className="text-white">{formatNumber(Number(movie.dislikes) || 0)}</span>
-            </button>
-          </div>
-        </div>
-
-        <div className="container relative mx-auto flex flex-col gap-4 my-4">
+        <div className="container relative mx-auto flex flex-col gap-4 my-8">
           {banners.map((banner: any, index) => {
             const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${banner.image_url?.url}`;
             return (
@@ -232,7 +236,7 @@ const Slug = () => {
                       <Image
                         src={imageUrl || ""}    /* src={banner.image_url.url || ""} */
                         alt={banner.name}
-                        layout="fill"
+                        fill
                         className="rounded-lg"
                         unoptimized
                       />
@@ -245,21 +249,21 @@ const Slug = () => {
         </div>
         {movie.code && (
           <div className="my-4">
-            <h2 className="text-lg font-semibold text-[#FEA016]">Code:</h2>
-            <span className="inline-block bg-[#58585c] text-white px-4 py-2 rounded-full text-sm tracking-wide shadow">
+            <h2 className="text-lg font-semibold text-[#FEA016] mb-1">Code:</h2>
+            <span className="inline-block bg-[#58585c] text-white px-3 py-1 font-semibold rounded-full text-sm tracking-wide shadow">
               {movie.code}
             </span>
           </div>
         )}
         {movie.actresses && movie.actresses.length > 0 && (
           <div className="my-4">
-            <h2 className="text-lg font-semibold text-[#FEA016] mb-2">Diễn viên:</h2>
+            <h2 className="text-lg font-semibold text-[#FEA016] mb-1">Diễn viên:</h2>
             <ul className="flex flex-wrap gap-2">
 
               {movie.actresses.map((actress: any) => (
                 <Link href={`/dien-vien/${actress.slug}`} key={actress.documentId}>
                   <li>
-                    <span className="inline-block bg-[#58585c] text-white font-serif px-3 py-1 rounded-full text-sm hover:bg-red-5 00 transition">
+                    <span className="inline-block bg-[#58585c] text-white font-serif px-3 py-1 font-medium rounded-full text-sm hover:bg-red-5 00 transition">
                       {actress.name}
                     </span>
                   </li>
@@ -273,15 +277,15 @@ const Slug = () => {
 
 
         {movie.description && (
-          <div className="my-8">
+          <div className="my-4">
             <h2 className="text-lg font-semibold mb-2 text-[#FEA016]">Nội dung phim</h2>
-            <p className="text-sm text-zinc-300 leading-relaxed">{movie.description}</p>
+            <p className="text-sm font-semibold text-zinc-300 leading-relaxed">{movie.description}</p>
           </div>
         )}
 
       </main >
       <div className="my-16 container w-full md:mx-auto px-2">
-        <h2 className="text-white text-base md:text-xl mb-4">Các Phim Với Nội Dung Tương Tự:</h2>
+        <h2 className="text-white font-semibold text-base md:text-xl mb-4">Các Phim Với Nội Dung Tương Tự:</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {relatedMovies.map((relatedMovie: any) => {
             const imgUrl = relatedMovie.image?.url;

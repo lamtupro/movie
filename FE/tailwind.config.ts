@@ -17,9 +17,14 @@ export default {
           '0%': { transform: 'translateX(0%)' },
           '100%': { transform: 'translateX(-100%)' },
         },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
       },
       animation: {
         marquee: 'marquee 30s linear infinite',
+        shimmer: 'shimmer 1.5s infinite',
       },
     },
   },

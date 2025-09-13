@@ -67,10 +67,9 @@ const Banner = () => {
               <Image
                 src={imageUrl || ''}
                 alt={banner.name}
-                layout="fill"
+                fill
                 priority
-                fetchPriority="high"
-                className="rounded-lg"
+                className="rounded-lg " 
                 unoptimized
               />
             </a>
@@ -78,6 +77,7 @@ const Banner = () => {
             {/* ❌ Nút tắt riêng cho từng banner */}
             <button
               onClick={() => handleClose(banner.documentId)}
+              aria-label="Đóng banner"
               className="absolute right-[-2px] top-[-2px] bg-white text-black border p-1 rounded-full shadow-md hover:bg-gray-200 transition"
             >
               ❌

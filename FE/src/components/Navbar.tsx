@@ -76,17 +76,17 @@ const Navbar = () => {
           {/* Nav Menu */}
           <ul className="flex flex-wrap gap-x-3 gap-y-2 text-sm md:text-base">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
-                <li
-                  className={`cursor-pointer px-3 py-1 md:px-4 md:py-2 rounded-lg 
-              ${pathname === item.href
-                      ? 'bg-red-500'
-                      : 'bg-zinc-800 hover:text-gray-400'}
-            `}
-                >
+              <li
+                key={item.href}
+                className={`cursor-pointer px-3 py-1 md:px-4 md:py-2 rounded-lg ${pathname === item.href
+                  ? 'bg-red-500'
+                  : 'bg-zinc-800 hover:text-gray-400'
+                  }`}
+              >
+                <Link href={item.href}>
                   {item.label}
-                </li>
-              </Link>
+                </Link>
+              </li>
             ))}
           </ul>
 
@@ -117,29 +117,39 @@ const Navbar = () => {
       <div className="container relative mx-auto flex flex-col gap-4 px-4 my-4">
         {banners.map((banner: any, index) => {
           const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${banner.image_url?.url}`;
+
+          const handleBannerClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+            e.preventDefault();
+
+            if (typeof window !== "undefined" && window.gtag) {
+              window.gtag('event', 'click_QC_tren', {
+                banner_id: banner.documentId,
+                ten_doi_tac: banner.name || 'Unnamed Banner',
+                banner_link: banner.link,
+                value: 1,
+              });
+            }
+
+            // Mở link sau khi gửi event
+            window.open(banner.link, "_blank", "noopener,noreferrer");
+          };
+
           return (
             <div key={index} className="relative w-full md:h-32 h-16 flex flex-col gap-2 rounded-lg">
               <div className="relative w-full h-32 rounded-lg hover:scale-105 transition-transform duration-300">
                 {banner.image_url && (
-                  <a href={`${banner.link}`} target="_blank" rel="noopener noreferrer" onClick={() => {
-                    if (typeof window !== "undefined" && window.gtag) {
-                      window.gtag('event', 'click_QC_tren', {
-                        banner_id: banner.documentId,
-                        ten_doi_tac: banner.name || 'Unnamed Banner',
-                        banner_link: banner.link,
-                        value: 1,
-                      });
-                    }
-                  }}>
-                    <Image
-                      src={imageUrl || ""}    /* src={banner.image_url.url || ""} */
-                      alt={banner.name}
-                      layout="fill"
-                      className="rounded-lg"
-                      priority
-                      fetchPriority="high"
-                      unoptimized
-                    />
+                  <a href={banner.link} onClick={handleBannerClick}>
+                    {imageUrl && (
+                      <Image
+                        src={imageUrl}
+                        alt={banner.name || "Banner"}
+                        fill
+                        className="rounded-lg"
+                        priority
+                        fetchPriority="high"
+                        unoptimized
+                      />
+                    )}
                   </a>
                 )}
               </div>

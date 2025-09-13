@@ -5,21 +5,22 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Banner from "../components/Banner";
 import GoogleAnalytics from "../components/Googleanalytics";
-import Head from "next/head";
 import MaintenancePage from "./bao-tri/page";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap", //preload tăng CLS
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Quốc Lâm Tự",
+  title: "Top các bộ phim sex hay nhất 2025 - Quốc Lâm Tự",
   description: "Xem phim sex miễn phí, top phim sex không che, phim sex hay",
   icons: {
     icon: "/favicon.png", // favicon ở public/favicon.png

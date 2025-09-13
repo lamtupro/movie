@@ -1,5 +1,5 @@
+"use client"
 import React, { useEffect, useRef, useState } from 'react';
-import { FaPlay } from 'react-icons/fa';
 import { event as gaEvent } from '@/src/lib/gtag';
 
 interface VideoPlayerProps {
@@ -13,7 +13,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, title }) => {
     const [canSkip, setCanSkip] = useState(false);
     const [countdown, setCountdown] = useState(5);
     const [watchTime, setWatchTime] = useState(0); // Thời gian xem quảng cáo
-    const [videoAds, setVideoAds] = useState<any[]>([]);
+    const [videoAds, setVideoAds] = useState<any[]>([]); // cái này chưa chuẩn typescript
     const [isLinkActive, setIsLinkActive] = useState(true); // Trạng thái link còn hiệu lực
 
     const adRef = useRef<HTMLVideoElement>(null);
@@ -107,7 +107,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, title }) => {
 
     return (
         <div
-            className="w-full aspect-video rounded-lg shadow-lg relative bg-black flex items-center justify-center cursor-pointer"
+            className="w-full rounded-lg shadow-lg relative bg-black flex items-center justify-center cursor-pointer"
         /* onClick={handleStart} */
         >
             {/* Trạng thái chờ bắt đầu */}
@@ -151,14 +151,16 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, title }) => {
 
             {/* Video chính */}
             {/*  {showMainVideo && ( */}
-            <div className="relative w-full aspect-video rounded-lg overflow-hidden">
+            <div className="w-full aspect-video rounded-lg shadow-lg relative bg-black overflow-hidden">
                 <iframe
                     src={url}
-                    className=" inset-0 w-full h-full border-none object-cover"
-                   title={title}
+                    title={title}
+                    className="inset-0 w-full h-full border-none"
                     allowFullScreen
                 ></iframe>
             </div>
+
+
             {/* )} */}
 
 
