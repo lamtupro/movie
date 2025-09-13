@@ -1,7 +1,7 @@
 import MovieSection from '@/src/components/MovieSection'
 import { generateSeoMetadata } from '@/src/lib/seo';
 
-export async function generateMetadata({ searchParams }: { searchParams: { page?: string } }) {
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
   const resolvedParams = await searchParams;
   const page = parseInt(resolvedParams.page || "1", 10);
   const canonical =
