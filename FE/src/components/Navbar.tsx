@@ -1,38 +1,36 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from 'react';
-import { FiSearch } from 'react-icons/fi';
-import { usePathname } from 'next/navigation'
+import { useEffect, useState } from "react";
+import { FiSearch } from "react-icons/fi";
+import { usePathname } from "next/navigation";
 import Marquee from "./Marquee";
 
-
 const Navbar = () => {
-
   const router = useRouter();
 
   const [search, setSearch] = useState("");
-  const [banners, setBanners] = useState([])
+  const [banners, setBanners] = useState([]);
 
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const navItems = [
-    { href: '/', label: 'Trang Chủ' },
-    { href: '/phim-hay', label: 'Phim Hay' },
-    { href: '/gai-xinh', label: 'Gái Xinh' },
-    { href: '/nhat-ban', label: 'Nhật Bản' },
-    { href: '/trung-quoc', label: 'Trung Quốc' },
-    { href: '/han-quoc', label: 'Hàn Quốc' },
-    { href: '/au-my', label: 'Âu Mỹ' },
-    { href: '/khong-che', label: 'Không Che' },
-    { href: '/viet-sub', label: 'Vietsub' },
-    { href: '/tap-the', label: 'Tập Thể' },
-    { href: '/vung-trom', label: 'Vụng Trộm' },
-    { href: '/hiep-dam', label: 'Hiếp Dâm' },
+    { href: "/", label: "Trang Chủ" },
+    { href: "/phim-hay", label: "Phim Hay" },
+    { href: "/gai-xinh", label: "Gái Xinh" },
+    { href: "/nhat-ban", label: "Nhật Bản" },
+    { href: "/trung-quoc", label: "Trung Quốc" },
+    { href: "/han-quoc", label: "Hàn Quốc" },
+    { href: "/au-my", label: "Âu Mỹ" },
+    { href: "/khong-che", label: "Không Che" },
+    { href: "/viet-sub", label: "Vietsub" },
+    { href: "/tap-the", label: "Tập Thể" },
+    { href: "/vung-trom", label: "Vụng Trộm" },
+    { href: "/hiep-dam", label: "Hiếp Dâm" },
     /* { href: '/dien-vien', label: 'Diễn Viên' } */
-  ]
+  ];
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && search.trim() !== "") {
@@ -40,35 +38,32 @@ const Navbar = () => {
     }
   };
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/banners?filters[banner_top][$eq]=true&populate=*`,)
-      .then(res => res.json())
-      .then(data => {
+    fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/banners?filters[banner_top][$eq]=true&populate=*`
+    )
+      .then((res) => res.json())
+      .then((data) => {
         // Nếu trả về đúng định dạng và có mảng data
-        console.log('Banner data:', data);
+        console.log("Banner data:", data);
         if (Array.isArray(data?.data)) {
           setBanners(data.data);
         } else {
-          console.warn('Không có banner top hoặc lỗi định dạng:', data);
+          console.warn("Không có banner top hoặc lỗi định dạng:", data);
           setBanners([]); // fallback an toàn
         }
       })
-      .catch(err => {
-        console.error('Lỗi fetch banner:', err);
+      .catch((err) => {
+        console.error("Lỗi fetch banner:", err);
         setBanners([]); // fallback nếu lỗi mạng, v.v.
       });
   }, []);
 
-
   return (
     <div className="bg-[#0F0F10] text-white py-4">
       <div className=" ml-4 my-4">
-        <Link className="inline-block" href='/'><Image
-          src="/logo.png"
-          alt="logo"
-          width={220}
-          height={120}
-          priority
-        /></Link>
+        <Link className="inline-block" href="/">
+          <Image src="/logo.png" alt="logo" width={220} height={120} priority />
+        </Link>
       </div>
 
       <nav className=" py-3">
@@ -78,14 +73,13 @@ const Navbar = () => {
             {navItems.map((item) => (
               <li
                 key={item.href}
-                className={`cursor-pointer px-3 py-1 md:px-4 md:py-2 rounded-lg ${pathname === item.href
-                  ? 'bg-red-500'
-                  : 'bg-zinc-800 hover:text-gray-400'
-                  }`}
+                className={`cursor-pointer px-3 py-1 md:px-4 md:py-2 rounded-lg ${
+                  pathname === item.href
+                    ? "bg-red-500"
+                    : "bg-zinc-800 hover:text-gray-400"
+                }`}
               >
-                <Link href={item.href}>
-                  {item.label}
-                </Link>
+                <Link href={item.href}>{item.label}</Link>
               </li>
             ))}
           </ul>
@@ -104,7 +98,9 @@ const Navbar = () => {
               className="absolute right-4 top-2.5 text-gray-400 cursor-pointer"
               onClick={() => {
                 if (search.trim() !== "") {
-                  router.push(`/search?query=${encodeURIComponent(search.trim())}`);
+                  router.push(
+                    `/search?query=${encodeURIComponent(search.trim())}`
+                  );
                 }
               }}
             />
@@ -118,13 +114,15 @@ const Navbar = () => {
         {banners.map((banner: any, index) => {
           const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${banner.image_url?.url}`;
 
-          const handleBannerClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+          const handleBannerClick = (
+            e: React.MouseEvent<HTMLAnchorElement>
+          ) => {
             e.preventDefault();
 
             if (typeof window !== "undefined" && window.gtag) {
-              window.gtag('event', 'click_QC_tren', {
+              window.gtag("event", "click_QC_tren", {
                 banner_id: banner.documentId,
-                ten_doi_tac: banner.name || 'Unnamed Banner',
+                ten_doi_tac: banner.name || "Unnamed Banner",
                 banner_link: banner.link,
                 value: 1,
               });
@@ -135,31 +133,42 @@ const Navbar = () => {
           };
 
           return (
-            <div key={index} className="relative w-full md:h-32 h-16 flex flex-col gap-2 rounded-lg">
-              <div className="relative w-full h-32 rounded-lg hover:scale-105 transition-transform duration-300">
-                {banner.image_url && (
-                  <a href={banner.link} onClick={handleBannerClick}>
-                    {imageUrl && (
-                      <Image
-                        src={imageUrl}
-                        alt={banner.name || "Banner"}
-                        fill
-                        className="rounded-lg"
-                        priority
-                        fetchPriority="high"
-                        unoptimized
-                      />
-                    )}
-                  </a>
-                )}
-              </div>
+          
+            <div
+              key={index}
+              className="relative w-full flex flex-col gap-2 rounded-lg md:max-w-[70%] md:mx-auto"
+            >
+              {banner.image_url && (
+                <a
+                  href={banner.link}
+                  onClick={handleBannerClick}
+                  className="block w-full rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300"
+                >
+                  <div
+                    className="relative w-full"
+                    style={{
+                      aspectRatio: `${banner.image_url.width} / ${banner.image_url.height}`,
+                    }}
+                  >
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${banner.image_url.url}`}
+                      alt={banner.name || "Banner"}
+                      fill
+                      className="rounded-lg object-cover"
+                      priority
+                      fetchPriority="high"
+                      unoptimized
+                    />
+                  </div>
+                </a>
+              )}
             </div>
           );
         })}
       </div>
       <hr className="border-gray-500 " />
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
