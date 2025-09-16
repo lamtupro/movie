@@ -2,20 +2,33 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <footer className="bg-black text-white py-1">
-            <div className="max-w-6xl mx-auto px-4">
-               {/*  <a
-                    href="https://t.me/+6kYIuxQYxH02N2Y1" target="_blank"
-                    className="w-fit mx-auto px-3 py-2 mt-4 flex gap-2 bg-gray-700 text-white text-center rounded-2xl shadow hover:bg-gray-600 transition duration-300"
-                >
-                    <img src="/telegram.svg" className="w-6 h-6" /> Vào nhóm chat telegram
-                </a> */}
-                <p className="mt-4 text-gray-300">quoclamtu.live là web xem phim dành cho người lớn trên 19 tuổi, giúp bạn giải trí, thỏa mãn sinh lý, dưới 19 tuổi xin vui lòng quay ra.
+       <footer className="bg-black text-gray-300 py-6">
+  <div className="max-w-7xl mx-auto px-4 text-sm md:text-base">
+    <p className="leading-relaxed text-justify">
+      <span className="font-semibold text-white">quoclamtu.live</span> là web xem phim dành cho người lớn trên 19 tuổi, giúp bạn giải trí, thỏa mãn sinh lý. 
+      Nếu bạn dưới 19 tuổi xin vui lòng quay ra.
+    </p>
 
-                    Trang web này không đăng tải các clip Việt Nam, video ấu dâm trẻ em,... .Nội dung phim được dàn dựng từ trước, hoàn toàn không có thật, người xem tuyệt đối không bắt chước hành động trong phim, tránh vi phạm pháp luật.</p>
-                {/*     <p className='text-center my-4 text-gray-300'>Liên hệ quảng cáo</p> */}
-            </div>
-        </footer>
+    <p className="mt-4 leading-relaxed text-justify">
+      Trang web này không đăng tải các clip Việt Nam, video ấu dâm trẻ em,... 
+      Nội dung phim được dàn dựng từ trước, hoàn toàn không có thật. 
+      Người xem tuyệt đối không bắt chước hành động trong phim để tránh vi phạm pháp luật.
+    </p>
+
+    {/* Liên hệ quảng cáo */}
+    <div className="mt-6 text-center border-t border-gray-700 pt-4">
+      <p>
+        LHQC Telegram:{" "}
+        <span
+          className="text-blue-400 hover:underline"
+        >
+          @conganxaxx
+        </span>
+      </p>
+    </div>
+  </div>
+</footer>
+
     )
 }
 

@@ -39,7 +39,7 @@ const MovieCard = ({ movie }: { movie: any }) => {
             className={`w-full h-40 md:h-48 object-cover rounded-lg transition-transform duration-500 ${
               loaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
             } group-hover:scale-105`}
-            onLoadingComplete={() => setLoaded(true)}
+            onLoad={() => setLoaded(true)}
           />
 
           {movie.title && (
